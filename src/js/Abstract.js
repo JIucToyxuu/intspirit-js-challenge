@@ -1,12 +1,9 @@
 define(function(){
- 		
-		
-			function run() {
-				alert('abstract module')
-			}
-			return {
-				run: run()
-			}
-		
-	
+	/* заглушка */
+ 	function run() {
+		alert('Abstract module = config empty!')
+	}
+	return {
+		run: run()
+	}
 });

@@ -1,32 +1,34 @@
 'use strict'
 
 var App = {
-	
-		init: function(config) {
-			config = config || {};
-			var checkTask = false;
-			$.get('src/js/'+config.nameTask+'.js', function(response) { checkTask = true });
-
-			/*var currentTask = (config.nameTask && requirejs(['app/'+config.nameTask])) ? requirejs(['app/'+config.nameTask]) : requirejs(['app/Abstract']);
-			/*currentTask.run();*/
-
-			var r = require(['app/'+config.nameTask])
-			console.log(checkTask)
-		},
-		run: function(currentTask) {
-			/*console.log(App.currentTask);*/
-			
-		}
+	init: function(config) {
+		config = config || {};
+		/* проверка на наличие js Файла  */
+		/* var checkTask = false;
+		$.get('src/js/'+config.nameTask+'.js', function(response) { checkTask = true });*/
+		var currentTask = (config.nameTask /*&& requirejs(['app/'+config.nameTask])   /* проверка */) ? requirejs(['app/'+config.nameTask]) : requirejs(['app/Abstract']);
+		currentTask.run();
+		console.log(currentTask)
+		/*var r = require(['app/'+config.nameTask])
+		console.log(r)*/
+	},
+	run: function(currentTask) {
+		/*console.log(App.currentTask);*/
+	}
 	
 };
 
 
-
-var r = App.init({
-	nameTask: 'Tassk1'
+/* симуляция события запуска Task1 */
+App.init({
+	nameTask: 'Task1'
 });
-App.run(r);
 
+
+/* сделать роутинг через хэши. каждый хэш вызывает опередленный таск. пр: example.ru#Task1  => App.init(Task1).run();
+
+
+/* мусор для мыслей */
 /*
 
 (function () {
