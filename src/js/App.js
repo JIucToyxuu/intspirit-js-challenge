@@ -23,7 +23,7 @@ var App = {
 
 
 var r = App.init({
-	nameTask: 'Task1'
+	nameTask: 'Tassk1'
 });
 App.run(r);
 
