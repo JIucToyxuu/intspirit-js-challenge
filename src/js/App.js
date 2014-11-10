@@ -21,7 +21,7 @@ var App = {
 
 /* симуляция события запуска Task1 */
 App.init({
-	nameTask: 'Task1'
+	nameTask: 'Task2'
 });
 
 

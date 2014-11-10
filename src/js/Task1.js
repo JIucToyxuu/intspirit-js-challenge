@@ -1,9 +1,7 @@
-define(function(){
- 	var API = require(['app/API']);
+define(['app/API'], function() {	
  	function run() {
-		console.log('Task1 module')
-		var s = API.postResponse();
-		console.log("s = "+s);
+		console.log('Task1 module');
+		API.postResponse();
 	}
 	return {
 		run: run()

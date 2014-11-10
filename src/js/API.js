@@ -1,4 +1,4 @@
-define(function(){	
+var API = (function(){	
 	/* API for Task1 */
 	function postResponse() { 
 		console.log('postResponse'); /* test point */	
@@ -31,9 +31,8 @@ define(function(){
 		console.log(result); /* test */		
 	}
 	return {
-		postResponse: postResponse(),
-		getResponseCodes: getResponseCodes(),
-		getDataSet: getDataSet()
+		postResponse: postResponse,
+		getResponseCodes: getResponseCodes,
+		getDataSet: getDataSet
 	}
-});
-/* Есть проблема: после подключения API.js к другому js файлу, выполняются все функции (из блока return) подряд (даже не вызываемые) */
+}());
