@@ -1,7 +1,7 @@
 requirejs.config({
     baseUrl: 'lib',
     paths: {
-        app: '../src/js'
+        app: '../js'
     }
 });
 requirejs(['app/App']); // стартовый файл

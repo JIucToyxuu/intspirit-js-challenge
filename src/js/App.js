@@ -7,8 +7,8 @@ var App = {
 		/* var checkTask = false;
 		$.get('src/js/'+config.nameTask+'.js', function(response) { checkTask = true });*/
 		var currentTask = (config.nameTask /*&& requirejs(['app/'+config.nameTask])   /* проверка */) ? requirejs(['app/'+config.nameTask]) : requirejs(['app/Abstract']);
-		currentTask.run();
-		console.log(currentTask)
+		return currentTask;
+		/*currentTask.run;*/
 		/*var r = require(['app/'+config.nameTask])
 		console.log(r)*/
 	},
@@ -20,12 +20,30 @@ var App = {
 
 
 /* симуляция события запуска Task1 */
-App.init({
-	nameTask: 'Task2'
+/*App.init({
+	nameTask: window.location.hash.substring(1)
+});*
+
+/* сделать роутинг через хэши. каждый хэш вызывает опередленный таск. пр: example.ru#Task1  => App.init(Task1).run(); */
+
+
+$( document ).ready(function() {
+	(window.location.hash===undefined) ? window.location.href = window.location.href.substr(0, window.location.href.indexOf('#')) : console.log(window.location.hash)
+	
+  $( "a" ).bind( "click", function() {
+    var s = App.init({
+		nameTask: window.location.hash.substring(1)
+	});
+	/*s.run;*/
+  });
+
 });
 
-
-/* сделать роутинг через хэши. каждый хэш вызывает опередленный таск. пр: example.ru#Task1  => App.init(Task1).run();
+/*$('body').on('click', 'a', function(e) {
+    App.init({
+		nameTask: window.location.hash.substring(1)
+	});
+});
 
 
 /* мусор для мыслей */
