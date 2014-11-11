@@ -8,7 +8,7 @@ html, body {
 	min-height: 500px;
 	min-width: 800px;
 	overflow: auto;
-	background: url('../img/swirl_pattern.png');
+	background: url('../content/images/swirl_pattern.png');
 }
 #wrap {
 	display: block;
@@ -18,7 +18,7 @@ html, body {
 	margin: 0 auto;
 }
 header {
-	background: url('../img/subtle_white_mini_waves.png');
+	background: url('../content/images/subtle_white_mini_waves.png');
 	height: 70px;
 }
 nav {
