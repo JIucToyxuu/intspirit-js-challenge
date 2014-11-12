@@ -46,5 +46,5 @@ Temporary Items
 # My file
 # =========================
 bower_components
-*.sublime-project
+*.sublime-*
 node_modules
