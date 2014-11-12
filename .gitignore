@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -44,4 +45,6 @@ Temporary Items
 
 # My file
 # =========================
-/bower_components/*
+bower_components
+*.sublime-project
+node_modules

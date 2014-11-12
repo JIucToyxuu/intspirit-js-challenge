@@ -1,7 +1,7 @@
 define(function(){
- 	function nameMethod() {
+	function render() {
 		
-	}
+	} 	
 	return {
 		
 	};

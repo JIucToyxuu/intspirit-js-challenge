@@ -1,19 +1,22 @@
-define(function(){
+define(['jquery'], function($){
 	var mainUrl = 'http://careers.intspirit.com/endpoint/';
 	function postRequest(endUrl, params, nameMethod) {
-		return $.post(mainUrl+endUrl, params)
-		.done(function(response){
-			return response;
+		var dfd = new $.Deferred();
+		$.post(mainUrl+endUrl, params)
+		.done(function(obj, status, jqXHR){
+			dfd.resolve(obj);
 		})
 		.fail(function(){
-			alert(nameMethod+' - FAIL!');
-			return {};
+			dfd.reject(nameMethod+' - FAIL!')
 		});
+
+		return dfd.promise();
 	}
 	function getRequest(endUrl, nameMethod) {
 		return $.get(mainUrl+endUrl)
-		.done(function(response){
-			return response;
+		.done(function(response, status, obj){
+			return obj;
+			ssss
 		})
 		.fail(function(){
 			alert(nameMethod+' - FAIL!');
