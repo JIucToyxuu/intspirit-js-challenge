@@ -7,7 +7,7 @@ define(['jquery'], function($){
 			dfd.resolve(obj);
 		})
 		.fail(function(){
-			dfd.reject(nameMethod+' - FAIL!')
+			dfd.reject(nameMethod+' - FAIL!');
 		});
 
 		return dfd.promise();
@@ -16,7 +16,6 @@ define(['jquery'], function($){
 		return $.get(mainUrl+endUrl)
 		.done(function(response, status, obj){
 			return obj;
-			ssss
 		})
 		.fail(function(){
 			alert(nameMethod+' - FAIL!');

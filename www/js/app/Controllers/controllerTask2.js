@@ -7,7 +7,7 @@ define(function(){
 				console.log(response);
 			});
 		}
-	}
+	};
 	return {
 		Task: Task
 	};
