@@ -23,20 +23,17 @@ define(['jquery'], function($){
 		return returnObject.promise();
 	}
 	/* API for Task1 */
-	function postResponse(endUrl, params) { 
-		console.log('postResponse'); /* test point */	
-		/* jsonObject contains data for request */		
+	function postResponse(endUrl, params) {
+		/* jsonObject contains data for request */
 		return postRequest(endUrl, params, 'postResponse');
 	}
 	/* API for Task2 */
 	function getResponseCodes(endUrl) {
-		console.log('getResponseCodes'); /* test point */
 		return getRequest(endUrl, 'getResponseCodes');
 	}
 	/* API for Task3 */
 	function getDataSet(endUrl) {
-		console.log('getDataSet'); /* test point */
-		return getRequest(endUrl, 'getDataSet');		
+		return getRequest(endUrl, 'getDataSet');
 	}
 	return {
 		postResponse: postResponse,
