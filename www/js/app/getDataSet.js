@@ -1,16 +1,12 @@
-/*define(['app/src/views/viewTask2', 'app/src/API'], function(View, API){
-	var Task = {
-		run: function() {
-			console.log('Task3 module run');
-			API.getDataSet('data_set').done(function(response, status, obj){
-				View.render(obj);
-			});
+define([/*'main/js/app/views/viewGetDataSet',*/ 'main/js/app/API'], function(/*View,*/ API){
+	console.log("getDataSet work!"); //test point
+	API.getResponseCodes('response_codes').then(
+		function(returnObject) {
+			//add params to JSON
+			console.log(returnObject)
+		},
+		function(returnObject){
+			alert(returnObject)
 		}
-	};
-	return {
-		Task: Task
-	};
-});*/
-define(function(){
-	console.log("getDataSet work!");
+	);
 });

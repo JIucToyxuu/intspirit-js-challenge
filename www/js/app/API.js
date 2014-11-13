@@ -1,43 +1,39 @@
 define(['jquery'], function($){
 	var mainUrl = 'http://careers.intspirit.com/endpoint/';
 	function postRequest(endUrl, params, nameMethod) {
-		var dfd = new $.Deferred();
+		var returnObject = new $.Deferred();
 		$.post(mainUrl+endUrl, params)
-		.done(function(obj, status, jqXHR){
-			dfd.resolve(obj);
+		.done(function(response, status, obj){
+			returnObject.resolve(obj);
 		})
 		.fail(function(){
-			dfd.reject(nameMethod+' - FAIL!')
+			returnObject.reject(nameMethod+' - Post request failed!');
 		});
-
-		return dfd.promise();
+		return returnObject.promise();
 	}
 	function getRequest(endUrl, nameMethod) {
-		return $.get(mainUrl+endUrl)
+		var returnObject = new $.Deferred();
+		$.get(mainUrl+endUrl)
 		.done(function(response, status, obj){
-			return obj;
-			ssss
+			returnObject.resolve(obj);
 		})
 		.fail(function(){
-			alert(nameMethod+' - FAIL!');
-			return {};
+			returnObject.reject(nameMethod+' - Get request failed!');
 		});
+		return returnObject.promise();
 	}
 	/* API for Task1 */
-	function postResponse(endUrl, params) { 
-		console.log('postResponse'); /* test point */	
-		/* jsonObject contains data for request */		
+	function postResponse(endUrl, params) {
+		/* jsonObject contains data for request */
 		return postRequest(endUrl, params, 'postResponse');
 	}
 	/* API for Task2 */
 	function getResponseCodes(endUrl) {
-		console.log('getResponseCodes'); /* test point */
 		return getRequest(endUrl, 'getResponseCodes');
 	}
 	/* API for Task3 */
 	function getDataSet(endUrl) {
-		console.log('getDataSet'); /* test point */
-		return getRequest(endUrl, 'getDataSet');		
+		return getRequest(endUrl, 'getDataSet');
 	}
 	return {
 		postResponse: postResponse,

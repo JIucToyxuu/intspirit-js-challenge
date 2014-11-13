@@ -1,17 +1,11 @@
-/*define(function(){
-	var Task = {
-		run: function() {
-			console.log('Task2 module run');
-			requirejs(['app/src/API'], function(API){
-				var response = API.getResponseCodes('response_codes');
-				console.log(response);
-			});
-		}
-	}
-	return {
-		Task: Task
-	};
-});*/
-define(function(){
-	console.log("getResponseCodes work!");
+define(['jquery', 'main/js/app/controllers/controllerGetResponseCodes'], function($, requireController) {
+	console.log("getResponseCodes work!"); //test point
+	var controller = new requireController();
+	// yet without bindingUtils (for test functional)
+	$('#getCodes').click(function(){
+		//controller.start();
+		controller.start();
+		console.log(controller.success);
+		console.log(controller.errors);
+	});
 });
