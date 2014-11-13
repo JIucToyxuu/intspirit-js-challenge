@@ -2,30 +2,28 @@ define(['main/js/app/views/viewPostResponse', 'main/js/app/API'], function(View,
 	function start() {
 		console.log("controllerPostResponse work!"); //test point
 		var params = {
-			request: 'params' //здесь позднее добавить содержимое поля ввода текста 
+			request: $('#input-text').val() //text from input-box of html page
 		};
 		API.postResponse('post_response', params).then(
 			function(returnObject) {
 				//add params to JSON
-				var jsonObject = {};
-				jsonObject.status = returnObject.status;
-				jsonObject.statusText = returnObject.statusText;
-				jsonObject.responseText = returnObject.responseText;
-				//console.log(returnObject)
-				View.firstRender(jsonObject);
+				var jsonObject = {
+					status: returnObject.status,
+					statusText: returnObject.statusText,
+					responseText: returnObject.responseText
+				};
+				if(!$('#messagesContainer').length) {
+					//add new div-container for messages
+					View.addContainer();
+				}
+				(!!jsonObject.responseText) ? View.addSuccessMessage(jsonObject) : View.addErrorMessage(jsonObject);
 			},
 			function(returnObject){
-				alert(returnObject)
+				alert(returnObject); //решить что выводить
 			}
-		);
-	}
-	function run() {
-		View.run('lolks');
-		//console.log(!!$('#divMessages').length)
-		console.log($('.messages').length)
+		);		
 	}
 	return {
-		run: run,
 		start: start
 	};
 });

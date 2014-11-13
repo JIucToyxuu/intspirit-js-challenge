@@ -1,34 +1,30 @@
 define(['jquery', 'handlebars'], function($, Handlebars) {
-	function run(returnValue) {
-		if($('#divMessages').length) {
-			// if messages>5 delete last message
-			if($('.messages').length>4) {
-				$('.messages').last().remove();
-			}
-			this.render('lol');
-		}
-		else {
-			// add new div for messages
-			this.firstRender('lol');
-			this.render('lol');
-		}
+	function addContainer() {
+		//add empty div-container for messages
+		$('<div id="messagesContainer"></div>').addClass("messagesContainer").insertAfter('#btn-post');
 	}
-	function firstRender(returnValue) {
-		$('<div id="divMessages"></div>').insertAfter('#btn-post');
-		console.log('first render run');
+	function addSuccessMessage(returnValue) {
+		var html = '<div> {{responseText}}! Status request: {{status}}</div>';
+		addMessage(returnValue, html, "success");
+		console.log('add new success');
 	}
-	function render(returnValue) {
-		
-		console.log('render Task1 run');
-		// var html = '<div>{{name}}</div> <div>{{statusText}}</div> <div>{{responseText}}</div>';
-		var html = '<div>'+returnValue+'</div>';
-		/*returnValue = {name: returnValue};
-		var template = Handlebars.compile(html);*/
-		$(html).addClass("messages").appendTo($('#divMessages'));
-	} 	
+	function addErrorMessage(returnValue) {
+		var html = '<div>Error! {{statusText}}! Status request: {{status}}</div>';
+		addMessage(returnValue, html, "errors");
+		console.log('add new error');
+	}
+	function addMessage(returnValue, html, className) {
+		// if messages>5 delete last message
+		if($('.messages').length>4) {
+			$('.messages').last().remove();
+		}
+		// add new element
+		var template = Handlebars.compile(html);
+		$(template(returnValue)).addClass("messages").addClass(className).prependTo($('#messagesContainer'));
+	}
 	return {
-		run: run,
-		firstRender: firstRender,
-		render: render
+		addContainer: addContainer,
+		addErrorMessage: addErrorMessage,
+		addSuccessMessage: addSuccessMessage
 	};
 });

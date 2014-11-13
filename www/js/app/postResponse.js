@@ -15,11 +15,10 @@
 });*/
 define(function(require) {
 	console.log("postResponse work!"); //test point
-	var $ = require('jquery'),
-		controller = require('main/js/app/controllers/controllerPostResponse');
+	var controller = require('main/js/app/controllers/controllerPostResponse');
 		/*controller.start();*/
 		$('#btn-post').click(function(){
-			controller.run();
+			controller.start();
 		});
 });
 /*define(['main/js/app/controllers/controllerPostResponse', 'jquery'], function($, controller) {

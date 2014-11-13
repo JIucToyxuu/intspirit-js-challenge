@@ -55,22 +55,29 @@ html, body {
 	font-size: 1em;
 	display: inline-block;
 }
-#divMessages {
+.messagesContainer {
 	margin: 40px auto;
 	margin-top: 0;
 	display: block;
 	min-height: 100px;
 	width: 540px;
-	background: rgba(105,143,171,.8);
+	/*background: rgba(105,143,171,.8);*/
+	padding: 4px;
 }
 .messages {
-	margin: 5px auto;
+	margin: 2px auto;
 	display: block;
 	height: 40px;
 	width: 500px;
-	background: green;
+	line-height: 40px;
+	text-align: center;
 }
-.red {
-	background: red;
+.success {
+	background: rgba(0,255,0,.5);
+	border: 1px green solid;
+}
+.errors {
+	background: rgba(255,0,0,.5);
+	border: 1px red solid;
 }
 /* */
