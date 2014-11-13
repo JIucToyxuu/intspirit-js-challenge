@@ -4,14 +4,31 @@ define(['jquery', 'handlebars'], function($, Handlebars) {
 		$('<div id="messagesContainer"></div>').addClass("messagesContainer").insertAfter('#btn-post');
 	}
 	function addSuccessMessage(returnValue) {
+		$('#input-text').val('');
+		$('#btn-post').prop('disabled', true);
+		$('.errors').remove();
 		var html = '<div> {{responseText}}! Status request: {{status}}</div>';
 		addMessage(returnValue, html, "success");
-		console.log('add new success');
+		var i = 2;
+		var timer = setInterval(function(){
+			$('#btn-post').attr('Value', i+' ...');
+			if(!i) {	clearInterval(timer)	}
+			i--; 
+		}, 1000);
+		setTimeout(function(){
+			$('#btn-post').attr('Value', 'Submit').prop('disabled', false);
+			$('#messagesContainer').remove();
+		}, 3100);
 	}
 	function addErrorMessage(returnValue) {
+		$('#btn-post').attr('Value', 'Resubmit');
 		var html = '<div>Error! {{statusText}}! Status request: {{status}}</div>';
 		addMessage(returnValue, html, "errors");
-		console.log('add new error');
+	}
+	function emptyStringError() {
+		$('#input-text').val('');
+		var html = '<div>This field is empty!</div>';
+		addMessage({}, html, "errors");
 	}
 	function addMessage(returnValue, html, className) {
 		// if messages>5 delete last message
@@ -25,6 +42,7 @@ define(['jquery', 'handlebars'], function($, Handlebars) {
 	return {
 		addContainer: addContainer,
 		addErrorMessage: addErrorMessage,
-		addSuccessMessage: addSuccessMessage
+		addSuccessMessage: addSuccessMessage,
+		emptyStringError: emptyStringError
 	};
 });

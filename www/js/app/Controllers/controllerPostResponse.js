@@ -4,24 +4,29 @@ define(['main/js/app/views/viewPostResponse', 'main/js/app/API'], function(View,
 		var params = {
 			request: $('#input-text').val() //text from input-box of html page
 		};
-		API.postResponse('post_response', params).then(
-			function(returnObject) {
-				//add params to JSON
-				var jsonObject = {
-					status: returnObject.status,
-					statusText: returnObject.statusText,
-					responseText: returnObject.responseText
-				};
-				if(!$('#messagesContainer').length) {
-					//add new div-container for messages
-					View.addContainer();
+		if(!$('#messagesContainer').length) { //if container not exist
+			View.addContainer();
+		}
+		if(!$.trim($('#input-text').val())) {
+			View.emptyStringError();
+		}
+		else {
+			API.postResponse('post_response', params).then(
+				function(returnObject) {
+					//add params to JSON
+					var jsonObject = {
+						status: returnObject.status,
+						statusText: returnObject.statusText,
+						responseText: returnObject.responseText
+					};
+					(!!jsonObject.responseText) ? View.addSuccessMessage(jsonObject) : View.addErrorMessage(jsonObject);
+				},
+				function(returnObject){
+					alert(returnObject);
 				}
-				(!!jsonObject.responseText) ? View.addSuccessMessage(jsonObject) : View.addErrorMessage(jsonObject);
-			},
-			function(returnObject){
-				alert(returnObject); //решить что выводить
-			}
-		);		
+			);
+		}
+		
 	}
 	return {
 		start: start
