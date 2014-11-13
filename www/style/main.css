@@ -16,7 +16,7 @@ html, body {
 	height: 100%;
 	background: #abc;
 	margin: 0 auto;
-	overflow: hidden;
+	overflow: auto; /*auto?*/
 }
 .tasks {
 	background: rgba(212, 219, 226, 0.75);
@@ -37,6 +37,7 @@ html, body {
 	margin: 40px auto;
 	margin-top: 70px;
 	width: 600px;
+	overflow: hidden;
 }
 #btn-post {
 	color: rgba(0,0,0,.7);
@@ -54,5 +55,22 @@ html, body {
 	font-size: 1em;
 	display: inline-block;
 }
-
+#divMessages {
+	margin: 40px auto;
+	margin-top: 0;
+	display: block;
+	min-height: 100px;
+	width: 540px;
+	background: rgba(105,143,171,.8);
+}
+.messages {
+	margin: 5px auto;
+	display: block;
+	height: 40px;
+	width: 500px;
+	background: green;
+}
+.red {
+	background: red;
+}
 /* */

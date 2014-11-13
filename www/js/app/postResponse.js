@@ -1,4 +1,4 @@
-define(['main/js/app/views/viewPostResponse', 'main/js/app/API'], function(View, API){
+/*define(['main/js/app/views/viewPostResponse', 'main/js/app/API'], function(View, API){
 	console.log("postResponse work!"); //test point
 	var params = {
 		request: 'error' //здесь позднее добавить содержимое поля ввода текста 
@@ -12,4 +12,16 @@ define(['main/js/app/views/viewPostResponse', 'main/js/app/API'], function(View,
 			alert(returnObject)
 		}
 	);
+});*/
+define(function(require) {
+	console.log("postResponse work!"); //test point
+	var $ = require('jquery'),
+		controller = require('main/js/app/controllers/controllerPostResponse');
+		/*controller.start();*/
+		$('#btn-post').click(function(){
+			controller.run();
+		});
 });
+/*define(['main/js/app/controllers/controllerPostResponse', 'jquery'], function($, controller) {
+	console.log("postResponse work!"); //test point
+});*/
