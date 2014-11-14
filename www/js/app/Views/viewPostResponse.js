@@ -39,7 +39,14 @@ define(['jquery', 'handlebars'], function($, Handlebars) {
 		var template = Handlebars.compile(html);
 		$(template(returnValue)).addClass("messages").addClass(className).prependTo($('#messagesContainer'));
 	}
+	function deleteOver() {
+		// if messages>5 delete last message
+		if($('.messages').length>4) {
+			$('.messages').last().remove();
+		}
+	}
 	return {
+		deleteOver: deleteOver,
 		addContainer: addContainer,
 		addErrorMessage: addErrorMessage,
 		addSuccessMessage: addSuccessMessage,

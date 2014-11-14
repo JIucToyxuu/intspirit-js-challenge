@@ -5,6 +5,7 @@ define(['main/js/app/views/viewPostResponse', 'main/js/app/API'], function(View,
 		};
 		(!$('#messagesContainer').length) ? View.addContainer() : '';	//if container not exist
 		if(!$.trim($('#input-text').val())) {	//if string is empty
+			View.deleteOver(); //if errors>5 -> delete
 			View.emptyStringError(); //add message about empty string or string of white spaces
 		}
 		else {
