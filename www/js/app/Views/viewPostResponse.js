@@ -4,15 +4,15 @@ define(['jquery', 'handlebars'], function($, Handlebars) {
 		$('<div id="messagesContainer"></div>').addClass("messagesContainer").insertAfter('#btn-post');
 	}
 	function addSuccessMessage(returnValue) {
-		$('#input-text').val('');
-		$('#btn-post').prop('disabled', true);
-		$('.errors').remove();
+		$('#input-text').val('');	//set input string to empty
+		$('#btn-post').prop('disabled', true);	//disabled button
+		$('.errors').remove();	//delete div with error messages
 		var html = '<div> {{responseText}}! Status request: {{status}}</div>';
 		addMessage(returnValue, html, "success");
 		var i = 2;
 		var timer = setInterval(function(){
 			$('#btn-post').attr('Value', i+' ...');
-			if(!i) {	clearInterval(timer)	}
+			if(!i) {	clearInterval(timer);	}
 			i--; 
 		}, 1000);
 		setTimeout(function(){
@@ -23,6 +23,10 @@ define(['jquery', 'handlebars'], function($, Handlebars) {
 	function addErrorMessage(returnValue) {
 		$('#btn-post').attr('Value', 'Resubmit');
 		var html = '<div>Error! {{statusText}}! Status request: {{status}}</div>';
+		// if messages>5 delete last message
+		if($('.messages').length>4) {
+			$('.messages').last().remove();
+		}
 		addMessage(returnValue, html, "errors");
 	}
 	function emptyStringError() {
@@ -31,10 +35,6 @@ define(['jquery', 'handlebars'], function($, Handlebars) {
 		addMessage({}, html, "errors");
 	}
 	function addMessage(returnValue, html, className) {
-		// if messages>5 delete last message
-		if($('.messages').length>4) {
-			$('.messages').last().remove();
-		}
 		// add new element
 		var template = Handlebars.compile(html);
 		$(template(returnValue)).addClass("messages").addClass(className).prependTo($('#messagesContainer'));
