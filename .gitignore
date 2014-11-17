@@ -45,6 +45,6 @@ Temporary Items
 
 # My file
 # =========================
-bower_components
+src/js/components
 *.sublime-*
 node_modules
