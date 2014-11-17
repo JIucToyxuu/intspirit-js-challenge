@@ -14,7 +14,19 @@ define(['jquery', 'handlebars', 'flot'], function ($, Handlebars, flot) {
 	};
 
 	function showChart(data) {
-		
+		var success = [];
+		var errors = [];
+
+		console.log('data')
+		$.each(data.success, function(index, element) {
+			success.push([index, element]);
+		})
+		$.each(data.errors, function(index, element) {
+			errors.push([index, element]);
+		})
+		$.plot($("#chart"), [ success, errors ]);
+		console.log(success)
+		console.log(errors)
 	}
 
 	return {
@@ -26,8 +38,8 @@ define(['jquery', 'handlebars', 'flot'], function ($, Handlebars, flot) {
 			var source = $("#templateCodes").html();
 			var template = Handlebars.compile(source);
 			$('tbody').empty().append(template(data));
-			showChart(data);
 			//console.log(data)
-		}
+		},
+		showChart: showChart
 	};
 });

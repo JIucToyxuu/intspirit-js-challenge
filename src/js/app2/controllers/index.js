@@ -3,20 +3,24 @@ define(['../views/index', 'API'], function (view, API) {
 		var LENGTH_HISTORY = 3;
 
 		var stringHistory = data.history.substr(-LENGTH_HISTORY);
-		var success = [0];
-		var errors = [0];
+		var dataChart = {
+			success: [0],
+			errors: [0],
+		}
 		for(var i=0; i<stringHistory.length; i++) {
 			if(+stringHistory[i]) {
-				success.push(success[success.length-1]+1);
-				errors.push(errors[errors.length-1]);
+				dataChart.success.push(dataChart.success[dataChart.success.length-1]+1);
+				dataChart.errors.push(dataChart.errors[dataChart.errors.length-1]);
 			} else {
-				errors.push(errors[errors.length-1]+1);
-				success.push(success[success.length-1]);
+				dataChart.errors.push(dataChart.errors[dataChart.errors.length-1]+1);
+				dataChart.success.push(dataChart.success[dataChart.success.length-1]);
 			}
 		}
+
+		view.showChart(dataChart);
 		console.log(stringHistory);
-		console.log(success)
-		console.log(errors)
+		console.log(dataChart.success)
+		console.log(dataChart.errors)
 	}
 
 	return {
