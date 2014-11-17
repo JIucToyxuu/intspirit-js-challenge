@@ -1,3 +1,3 @@
-require(['./config'], function (config) {
-    require(['main/js/app/getResponseCodes']);
+require(['../common'], function () {
+    require(['./app2/app']);
 });

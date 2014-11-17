@@ -1,11 +1,20 @@
-define(['jquery', 'main/js/app/controllers/controllerGetResponseCodes'], function($, requireController) {
-	console.log("getResponseCodes work!"); //test point
-	var controller = new requireController();
-	// yet without bindingUtils (for test functional)
-	$('#getCodes').click(function(){
-		//controller.start();
-		controller.start();
-		console.log(controller.success);
-		console.log(controller.errors);
-	});
+define(['jquery', 'utils', './controllers/index'], function ($, utils, controller) {
+	var data = {
+		//counter last errors
+		counter: 0,
+		success: 0,
+		fails: 0,
+		percent: 0,
+		history: "",
+	};
+
+	var bindings = [{
+		target: '#getCodes',
+		name: 'click',
+		handler: function () {
+			controller.makeRequest(data);
+		}
+	}];
+
+	utils.processBindings(bindings);
 });

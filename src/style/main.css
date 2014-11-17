@@ -14,7 +14,7 @@ html, body {
 	display: block;
 	width: 800px;
 	height: 100%;
-	background: #abc;
+	background: rgba(170, 187, 204, .7);
 	margin: 0 auto;
 	overflow: auto;
 }
@@ -28,7 +28,7 @@ html, body {
 	margin: 10px auto;
 	border: 2px #abc solid;
 }
-/* delete tasks */
+/* delete tasks? */
 .tasks {
 	background: rgba(212, 219, 226, 0.75);
 	width: 600px;
@@ -89,5 +89,61 @@ html, body {
 .errors {
 	background: rgba(255,0,0,.5);
 	border: 1px red solid;
+}
+/* Task2 */
+table {
+	border-collapse: collapse;
+	margin: 20px auto;
+	padding: 30px;
+	background: url('../content/images/table.png');
+	border: 2px #bbb solid;
+	display: block;
+	height: 300px;
+	width: 500px;
+}
+table td {
+	width: 150px;
+}
+/* style table row */
+#head {
+	color: rgb(91, 123, 117);
+	font: 1em Verdana;
+	height: 56px;
+	text-align: center;
+	text-decoration: underline;
+}
+#count{
+	height: 82px;
+	text-align:center;
+}
+#last {
+	color: rgba(90, 98, 121, 0.8);
+	font: 1.25em 'Roboto Condensed', sans-serif;
+	height: 100px;
+	text-align: center;
+	vertical-align: bottom;
+}
+/* button */
+#getCodes {
+	display: block;
+	width: 150px;
+	height: 40px;
+	color: white;
+	line-height: 40px;
+	font: 1em sans-serif;
+	background-color: rgb(124, 163, 203);
+	border: 2px white solid;
+	margin: 0px auto;
+}
+#wrapButton {
+	padding: 10px;
+	height: 60px;
+	margin: 10px auto;
+	width: 170px;
+}
+#chart {
+	width: 500px;
+	height: 200px;
+	margin: 0 auto 20px;
 }
 /* */

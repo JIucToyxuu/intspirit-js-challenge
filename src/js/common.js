@@ -3,5 +3,6 @@ require.config({
 	paths: {
 		handlebars: 'components/handlebars/handlebars',
 		jquery: 'components/jquery/dist/jquery',
+		flot: 'components/Flot/jquery.flot',
 	}
 });

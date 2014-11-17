@@ -27,18 +27,14 @@ define(['jquery'], function($){
 		getResponseCodes: function() {
 			var dfd = new $.Deferred();
 			getRequest('response_codes').done(function(response, status, obj) {
-				dfd.resolve({
-					//add data to json file and return 
-				});
+				dfd.resolve(obj.responseJSON);
 			});
 			return dfd.promise();
 		},
 		getDataSet: function() {
 			var dfd = new $.Deferred();
 			getRequest('data_set').done(function(response, status, obj) {
-				dfd.resolve({
-					//add data to json file and return 
-				});
+				dfd.resolve(obj.responseJSON);
 			});
 			return dfd.promise();
 		}
