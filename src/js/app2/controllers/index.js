@@ -6,7 +6,7 @@ define(['../views/index', 'API'], function (view, API) {
 		var dataChart = {
 			success: [[0, 0]],
 			errors: [[0, 0]],
-		}
+		};
 		for(var i=0; i<stringHistory.length; i++) {
 			var lastSuccessCount = dataChart.success[dataChart.success.length-1][1];
 			var lastErrorsCount = dataChart.errors[dataChart.errors.length-1][1];

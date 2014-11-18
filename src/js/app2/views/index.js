@@ -58,7 +58,8 @@ define(['jquery', 'handlebars', 'flot'], function ($, Handlebars, flot) {
 			wrapButton.changeColor(result);
 			var source = $("#templateCodes").html();
 			var template = Handlebars.compile(source);
-			$('tbody').empty().append(template(data));
+			$("#show tbody").remove();
+			$("#show").append(template(data));
 		},
 		showChart: showChart
 	};

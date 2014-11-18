@@ -8,18 +8,49 @@
 	<body>
 		<div id="wrap">
 			<div class="tasks">
-				This is Task3
+				This is Task2
 			</div>
-			<div class="tasks">
-				This is content of Task3
+			<button id="getCodes">
+				Get codes
+			</button>
+			<table id="show">
+				<tbody>
+					<tr id="head">
+						<td>Success</td>
+						<td>Percent error</td>
+						<td>Failure</td>
+					</tr>
+					<tr id="count">
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3" id="last">Ошибок с крайнего успеха - 0</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="chart">
+				
 			</div>
-			<a href="postResponse.html" class="tasks">
-				Go to Task1
-			</a>
-			<a href="getResponseCodes.html" class="tasks">
-				Go to Task2
-			</a>
+
+
+			<script id="templateCodes" type="text/x-handlebars-template">
+				<tr id="head">
+					<td>Success</td>
+					<td>Percent error</td>
+					<td>Failure</td>
+				</tr>
+				<tr id="count">
+					<td>{{success}}</td>
+					<td>{{percent}} %</td>
+					<td>{{fails}}</td>
+				</tr>
+				<tr>
+					<td colspan="3" id="last">Ошибок с крайнего успеха - {{counter}}</td>
+				</tr>
+			</script>
 		</div>
-		<script data-main="js/mainGetDataSet" src="../bower_components/requirejs/require.js"></script>
+		<script data-main="js/app2/config.js" src="js/components/requirejs/require.js"></script>
 	</body>
 </html>

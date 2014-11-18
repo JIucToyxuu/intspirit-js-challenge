@@ -14,42 +14,27 @@
 				Get codes
 			</button>
 			<table id="show">
-				<tbody>
-					<tr id="head">
-						<td>Success</td>
-						<td>Percent error</td>
-						<td>Failure</td>
-					</tr>
-					<tr id="count">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="3" id="last">Ошибок с крайнего успеха - 0</td>
-					</tr>
-				</tbody>
+				<script id="templateCodes" type="text/x-handlebars-template">
+					<tbody>
+						<tr id="head">
+							<td>Success</td>
+							<td>Percent error</td>
+							<td>Failure</td>
+						</tr>
+						<tr id="count">
+							<td>{{success}}</td>
+							<td>{{percent}} %</td>
+							<td>{{fails}}</td>
+						</tr>
+						<tr>
+							<td colspan="3" id="last">Ошибок с крайнего успеха - {{counter}}</td>
+						</tr>
+					</tbody>
+				</script>
 			</table>
 			<div id="chart">
 				
 			</div>
-
-
-			<script id="templateCodes" type="text/x-handlebars-template">
-				<tr id="head">
-					<td>Success</td>
-					<td>Percent error</td>
-					<td>Failure</td>
-				</tr>
-				<tr id="count">
-					<td>{{success}}</td>
-					<td>{{percent}} %</td>
-					<td>{{fails}}</td>
-				</tr>
-				<tr>
-					<td colspan="3" id="last">Ошибок с крайнего успеха - {{counter}}</td>
-				</tr>
-			</script>
 		</div>
 		<script data-main="js/app2/config.js" src="js/components/requirejs/require.js"></script>
 	</body>
