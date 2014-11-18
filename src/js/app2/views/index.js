@@ -5,7 +5,7 @@ define(['jquery', 'handlebars', 'flot'], function ($, Handlebars, flot) {
 			return $('#wrapButton').length;
 		},
 		create: function() {
-			$('#getCodes').wrap('<div id="wrapButton"></div>');
+			$('#getData').wrap('<div id="wrapButton"></div>');
 		},
 		// change button color
 		changeColor: function(result) {

@@ -9,7 +9,7 @@ define(['jquery', 'utils', './controllers/index'], function ($, utils, controlle
 	};
 
 	var bindings = [{
-		target: '#getCodes',
+		target: '#getData',
 		name: 'click',
 		handler: function () {
 			controller.makeRequest(data);

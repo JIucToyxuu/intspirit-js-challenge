@@ -41,7 +41,18 @@ html, body {
 	font-size: 1.5em;
 	line-height: 120px;
 }
-
+/* button */
+#getData {
+	display: block;
+	width: 150px;
+	height: 40px;
+	color: white;
+	line-height: 40px;
+	font: 1em sans-serif;
+	background-color: rgb(124, 163, 203);
+	border: 2px white solid;
+	margin: 10px auto;
+}
 /* Task1 */
 #post-form {
 	background: rgba(212, 219, 226, 0.75);
@@ -122,18 +133,6 @@ html, body {
 	height: 100px;
 	text-align: center;
 	vertical-align: bottom;
-}
-/* button */
-#getCodes {
-	display: block;
-	width: 150px;
-	height: 40px;
-	color: white;
-	line-height: 40px;
-	font: 1em sans-serif;
-	background-color: rgb(124, 163, 203);
-	border: 2px white solid;
-	margin: 10px auto;
 }
 #wrapButton {
 	height: 60px;

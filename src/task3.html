@@ -2,55 +2,21 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<title>Task #3</title>
 		<link rel="stylesheet" href="style/main.css"/>
 		<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<div id="wrap">
 			<div class="tasks">
-				This is Task2
+				This is Task #3
 			</div>
-			<button id="getCodes">
-				Get codes
+			<button id="getData">
+				Get data set
 			</button>
-			<table id="show">
-				<tbody>
-					<tr id="head">
-						<td>Success</td>
-						<td>Percent error</td>
-						<td>Failure</td>
-					</tr>
-					<tr id="count">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="3" id="last">Ошибок с крайнего успеха - 0</td>
-					</tr>
-				</tbody>
-			</table>
-			<div id="chart">
-				
+			<div id="show">
 			</div>
-
-
-			<script id="templateCodes" type="text/x-handlebars-template">
-				<tr id="head">
-					<td>Success</td>
-					<td>Percent error</td>
-					<td>Failure</td>
-				</tr>
-				<tr id="count">
-					<td>{{success}}</td>
-					<td>{{percent}} %</td>
-					<td>{{fails}}</td>
-				</tr>
-				<tr>
-					<td colspan="3" id="last">Ошибок с крайнего успеха - {{counter}}</td>
-				</tr>
-			</script>
 		</div>
-		<script data-main="js/app2/config.js" src="js/components/requirejs/require.js"></script>
+		<script data-main="js/app3/config.js" src="js/components/requirejs/require.js"></script>
 	</body>
 </html>

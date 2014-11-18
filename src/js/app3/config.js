@@ -1,3 +1,3 @@
-require(['./config'], function (config) {
-    require(['main/js/app/getDataSet']);
+require(['../common'], function () {
+    require(['./app3/app']);
 });
