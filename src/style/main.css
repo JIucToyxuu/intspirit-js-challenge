@@ -91,7 +91,7 @@ html, body {
 	border: 1px red solid;
 }
 /* Task2 */
-table {
+#show {
 	border-collapse: collapse;
 	margin: 20px auto;
 	padding: 30px;
@@ -101,7 +101,7 @@ table {
 	height: 300px;
 	width: 500px;
 }
-table td {
+#show td {
 	width: 150px;
 }
 /* style table row */
@@ -133,17 +133,18 @@ table td {
 	font: 1em sans-serif;
 	background-color: rgb(124, 163, 203);
 	border: 2px white solid;
-	margin: 0px auto;
+	margin: 10px auto;
 }
 #wrapButton {
-	padding: 10px;
 	height: 60px;
 	margin: 10px auto;
 	width: 170px;
 }
-#chart {
+/* flot-chart block */
+.chart {
 	width: 500px;
-	height: 200px;
+	height: 300px;
 	margin: 0 auto 20px;
+	background: rgb(212, 219, 226);
 }
 /* */

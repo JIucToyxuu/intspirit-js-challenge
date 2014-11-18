@@ -5,7 +5,7 @@ define(['jquery', 'handlebars', 'flot'], function ($, Handlebars, flot) {
 			return $('#wrapButton').length;
 		},
 		create: function() {
-			$('#getCodes').wrap('<div id="wrapButton"></div>');
+			//$('#getCodes').wrap('<div id="wrapButton"></div>');
 		},
 		// change button color
 		changeColor: function(result) {
@@ -13,20 +13,40 @@ define(['jquery', 'handlebars', 'flot'], function ($, Handlebars, flot) {
 		}
 	};
 
-	function showChart(data) {
-		var success = [];
-		var errors = [];
+	function showChart(dataChart) {
+		var successChart = {
+			"label": "success",
+			"color": "green",
+			"data": dataChart.success,
+		};
+		var errorsChart = {
+			"label": "errors",
+			"color": "red",
+			"data": dataChart.errors,
+		};
 
-		console.log('data')
-		$.each(data.success, function(index, element) {
-			success.push([index, element]);
-		})
-		$.each(data.errors, function(index, element) {
-			errors.push([index, element]);
-		})
-		$.plot($("#chart"), [ success, errors ]);
-		console.log(success)
-		console.log(errors)
+		var options = {
+			yaxis: {
+				tickSize: 1,
+			},
+			xaxis: {
+				//show: false,
+				tickSize: 1,
+			},
+			grid: {
+				borderWidth: 1,
+				backgroundColor: {
+					colors: ["#fff", "#e4f4f4"]
+				},
+				margin: {
+					bottom: 10,
+					left: 10
+				}
+			},
+		};
+
+		$("#chart").addClass("chart");
+		$.plot($("#chart"), [successChart, errorsChart], options);
 	}
 
 	return {
