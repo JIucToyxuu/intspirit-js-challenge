@@ -154,7 +154,7 @@ html, body {
 	border: 2px #bbb solid;
 	width: 500px;
 }
-#container > ul > li {
+#container  li {
 	margin: 2px;
 	margin-left: 30px;
 }
