@@ -147,3 +147,14 @@ html, body {
 	background: rgb(212, 219, 226);
 }
 /* Task 3 */
+#container {
+	margin: 20px auto;
+	padding: 30px;
+	background: #abc;
+	border: 2px #bbb solid;
+	width: 500px;
+}
+#container > ul > li {
+	margin: 2px;
+	margin-left: 30px;
+}

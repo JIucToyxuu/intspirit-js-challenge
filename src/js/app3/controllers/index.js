@@ -13,15 +13,7 @@ define(['../views/index', 'API'], function (view, API) {
 			this.items[data.type][data.item]++;
 			console.log("count up for "+data.item);
 		},
-		/*
-			convert object for use Handlebars
-			from: items = { fruit = { apple: 2, banana: 4 } }
-			to: { type: "type", item: "" }
-		*/
-		convert: function() {
-
-		}
-		items: {}
+		items: {},
 	};
 
 	return {
@@ -33,7 +25,7 @@ define(['../views/index', 'API'], function (view, API) {
 				(!allItems.items[response.type].hasOwnProperty(response.item)) ? allItems.addItem(response) : allItems.increaseCount(response);
 				console.log(response)
 				console.log(allItems)
-				view.render(allItems.items);
+				view.render(allItems);
 			});
 			
 		},
