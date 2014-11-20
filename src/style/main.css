@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	outline: none;
 }
 html, body {
 	margin: 0;
@@ -54,25 +55,25 @@ html, body {
 	margin: 10px auto;
 }
 /* Task1 */
-#post-form {
+#postForm {
 	background: rgba(212, 219, 226, 0.75);
 	margin: 40px auto;
 	margin-top: 70px;
 	width: 600px;
 	overflow: auto;
 }
-#btn-post {
+#btnPost {
 	width: 100px;
 }
-#input-text {
+#inputText {
 	margin: 40px 33px;
 	width: 400px;
 	padding: 0 15px;
 	background: white;
 	border: 2px white solid;
 }
-#btn-post,
-#input-text {
+#btnPost,
+#inputText {
 	height: 40px;
 	font-size: 1em;
 	display: inline-block;
@@ -154,7 +155,18 @@ html, body {
 	border: 2px #bbb solid;
 	width: 500px;
 }
-#container > ul > li {
+#container  li {
 	margin: 2px;
 	margin-left: 30px;
+}
+#btnClear {
+	display: block;
+	width: 150px;
+	height: 40px;
+	color: white;
+	line-height: 40px;
+	font: 1em sans-serif;
+	background-color: rgb(236, 119, 119);
+	border: 2px white solid;
+	margin: 10px auto;
 }

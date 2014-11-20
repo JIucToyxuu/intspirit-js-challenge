@@ -1,6 +1,6 @@
 define(['jquery', 'utils', './controllers/index'], function ($, utils, controller) {
 	var bindings = [{
-		target: '#btn-post',
+		target: '#btnPost',
 		name: 'click',
 		handler: function () {
 			controller.makeRequest();
