@@ -1,13 +1,12 @@
-define(['jquery', 'utils', 'templates/compiled/task3', 'helpers'], function ($, utils) {
+define(['jquery', 'utils', 'handlebars', 'text!templates/task3.html', 'helpers'], function ($, utils, Handlebars, template) {
+	var compiled = Handlebars.compile(template);
+	var data = {};
+
 	function addContainer() {
-		if(!$("#container").length) {
-			$('#wrap').append('<div id="container"></div>');
-		}
+		$('#wrap').append('<div id="container"></div>');
 	}
 	function addButton(allItems) {
-		if(!$("#btnClear").length) {
-			$('#wrap').append('<button id="btnClear">Clear data</button>');
-		}
+		$('#wrap').append('<button id="btnClear">Clear data</button>');
 
 		utils.processBindings([{
 			target: '#btnClear',
@@ -20,27 +19,15 @@ define(['jquery', 'utils', 'templates/compiled/task3', 'helpers'], function ($, 
 		}]);
 	}
 
-
-	Handlebars.registerHelper('list', function(type, items) {
-		var plurality = "";
-		var out = "<ul>" + type;
-
-		$.each(items, function(index, value) {
-			(parseInt(value)>1 && index.slice(-1)!=="s")? plurality="s" : plurality="";
-			out += "<li data-item="+ index +" data-count="+ value +" >" + index + plurality +": "+ value + "</li>";
-		});
-		out += "</ul>";
-		return out;
-	});
-
-
 	return {
-		render: function (allItems) {
-			addContainer();
-			addButton(allItems);
-			var html = Handlebars.templates.task3(allItems);
-			$("#container").empty().append(html);
-			console.log(Handlebars.templates)
+		render: function (items) {
+			if(!$("#container").length) {
+				addContainer();
+			}
+			if(!$("#btnClear").length) {
+				addButton(items);
+			}
+			$("#container").empty().append(compiled(items));
 		}
 	};
 });

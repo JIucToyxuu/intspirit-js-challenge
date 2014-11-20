@@ -5,8 +5,9 @@ define(['handlebars'], function (Handlebars) {
 		var out = "<ul>" + type;
 
 		$.each(items, function(index, value) {
-			(parseInt(value)>1 && index.slice(-1)!=="s")? plurality="s" : plurality="";
-			out += "<li data-item="+ index +" data-count="+ value +" >" + index + plurality +": "+ value + "</li>";
+			(parseInt(value)>1 && index.slice(-1)!=="s") ? plurality="s" : plurality="";
+
+			out += "<li>" + index + plurality +": "+ value + "</li>";
 		});
 		out += "</ul>";
 		return out;
