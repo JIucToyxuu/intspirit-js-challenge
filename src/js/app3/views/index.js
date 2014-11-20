@@ -1,4 +1,4 @@
-define(['jquery', 'utils'/*, 'helpers'*/, 'templates/compiled/task3'], function ($, utils) {
+define(['jquery', 'utils', 'templates/compiled/task3', 'helpers'], function ($, utils) {
 	function addContainer() {
 		if(!$("#container").length) {
 			$('#wrap').append('<div id="container"></div>');
@@ -38,9 +38,9 @@ define(['jquery', 'utils'/*, 'helpers'*/, 'templates/compiled/task3'], function 
 		render: function (allItems) {
 			addContainer();
 			addButton(allItems);
-
 			var html = Handlebars.templates.task3(allItems);
 			$("#container").empty().append(html);
+			console.log(Handlebars.templates)
 		}
 	};
 });
