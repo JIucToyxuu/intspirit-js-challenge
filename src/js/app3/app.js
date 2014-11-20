@@ -1,4 +1,4 @@
-define(['jquery', 'utils', './controllers/index'], function ($, utils, controller) {
+define(['utils', './controllers/index'], function (utils, controller) {
 
 	var bindings = [{
 		target: '#getData',

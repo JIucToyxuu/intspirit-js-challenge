@@ -8,9 +8,9 @@ templates['task3'] = template({"1":function(depth0,helpers,partials,data) {
 },"2":function(depth0,helpers,partials,data) {
   return "";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<div id=\"container\">\r\n";
+  var stack1;
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.items : depth0), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "</div>\r\n";
-},"useData":true});
+  if (stack1 != null) { return stack1; }
+  else { return ''; }
+  },"useData":true});
 })();

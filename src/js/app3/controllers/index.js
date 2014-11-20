@@ -23,11 +23,12 @@ define(['../views/index', 'API'], function (view, API) {
 					allItems.addType(response.type);
 				} 
 				(!allItems.items[response.type].hasOwnProperty(response.item)) ? allItems.addItem(response) : allItems.increaseCount(response);
-				console.log(response)
-				console.log(allItems)
+				//console.log(response)
+				//console.log(allItems)
 				view.render(allItems);
 			});
 			
 		},
+		allItems: allItems
 	};
 });

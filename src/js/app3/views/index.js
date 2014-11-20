@@ -1,22 +1,46 @@
-define(['jquery', 'handlebars', 'templates/compiled/task3', 'helpers'], function ($, Handlebars) {
-	function plurality() {
-		$( "#container li" ).each(function() {
-		var count = $(this).data("count")
-		var item = $(this).data("item")
-		if(parseInt(count)>1 && item.slice(-1)!=="s")
-			$(this).append("s");
-		})
-	} // not work
+define(['jquery', 'utils'/*, 'helpers'*/, 'templates/compiled/task3'], function ($, utils) {
+	function addContainer() {
+		if(!$("#container").length) {
+			$('#wrap').append('<div id="container"></div>');
+		}
+	}
+	function addButton(allItems) {
+		if(!$("#btnClear").length) {
+			$('#wrap').append('<button id="btnClear">Clear data</button>');
+		}
+
+		utils.processBindings([{
+			target: '#btnClear',
+			name: 'click',
+			handler: function () {
+				allItems.items = {};
+				$('#container').remove();
+				$('#btnClear').remove();
+			}
+		}]);
+	}
+
+
+	Handlebars.registerHelper('list', function(type, items) {
+		var plurality = "";
+		var out = "<ul>" + type;
+
+		$.each(items, function(index, value) {
+			(parseInt(value)>1 && index.slice(-1)!=="s")? plurality="s" : plurality="";
+			out += "<li data-item="+ index +" data-count="+ value +" >" + index + plurality +": "+ value + "</li>";
+		});
+		out += "</ul>";
+		return out;
+	});
 
 
 	return {
 		render: function (allItems) {
-			//var html = temp(allItems);
-			Handlebars.templates.task3({"f":"s"})
-			/*var compiled = Handlebars.compile('<div id="container">{{#each items}}{{#list @key this}}{{/list}}{{/each}}</div>');
-			$("#container").remove();
-			$("#wrap").append(compiled(allItems));*/
-			console.log(Handlebars)
+			addContainer();
+			addButton(allItems);
+
+			var html = Handlebars.templates.task3(allItems);
+			$("#container").empty().append(html);
 		}
 	};
 });
