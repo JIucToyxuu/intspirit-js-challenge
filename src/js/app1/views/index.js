@@ -19,6 +19,7 @@ define(['jquery'], function ($) {
 	}
 
 	return {
+		MAX_ERRORS_COUNT: MAX_ERRORS_COUNT,
 		getText: function () {
 			return $('#inputText').val().trim();
 		},

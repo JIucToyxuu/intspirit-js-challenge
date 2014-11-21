@@ -1,5 +1,4 @@
-define(['../views/index', 'API'], function (view, API) {
-
+define(['../views/index', '../../API'], function (view, API) {
 	return {
 		makeRequest: function() {
 			var text = view.getText();

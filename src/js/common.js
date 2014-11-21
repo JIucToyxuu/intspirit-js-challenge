@@ -1,10 +1,12 @@
 require.config({
-	baseUrl: 'js',
+	//baseUrl: '../../src/js',
 	paths: {
-		handlebars: 'components/handlebars/handlebars',
-		jquery: 'components/jquery/dist/jquery',
-		flot: 'components/Flot/jquery.flot',
+		handlebars: 'src/js/components/handlebars/handlebars',
+		jquery: 'src/js/components/jquery/dist/jquery',
+		flot: 'src/js/components/Flot/jquery.flot',
 		templates: '../templates',
-		text: 'components/text/text'
+		text: 'src/js/components/text/text',
+		jasmine: 'src/js/components/jasmine/lib/jasmine-core/jasmine.js',
+		domReady: 'src/js/components/domReady/domReady'
 	}
 });
