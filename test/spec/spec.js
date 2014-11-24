@@ -1,31 +1,41 @@
-/*require(['../app1/views/index'], function (myModule) {
+require(['jquery', '../../src/js/app1/views/index', 'API', '../../src/js/app1/app'], function ($, view, API) {
 	'use strict';
+	$('.passed').first().remove();
+
+	spyOn(API, 'postResponse').and.callThrough();
+
+	describe('API', function() {
+
+		beforeEach(function() {
+			jasmine.Ajax.install();
+		});
+
+		afterEach(function() {
+			jasmine.Ajax.uninstall();
+		});
+		
+		it('method "postResponse" should be return success', function() {
+			var data = {
+				request: "Luke, I'm your father"
+			}
+
+			var promise = API.postResponse(data);
+			promise.then(function() {
+				console.log('success')
+			}, function() {
+				console.log("fail")
+			})
+
+	})
 
 	describe('Module', function() {
-		it('is plugged', function() {
-			expect(myModule).not.toBeUndefined();
+		it('is connected', function() {
+			expect(view).not.toBeUndefined();
 		}),
 		it('variable MAX_ERRORS_COUNT should be equal to 5', function() {
-			expect(myModule.MAX_ERRORS_COUNT).toEqual(5);
-			expect(myModule.MAX_ERRORS_COUNT).not.toEqual(6);
+			expect(view.MAX_ERRORS_COUNT).toEqual(5);
+			expect(view.MAX_ERRORS_COUNT).not.toEqual(6);
 		})
 	});
-});*/
-
-require(['domReady', '../../src/js/app1/views/index'], function (domReady, myModule) {
-	'use strict';
-	domReady(function() {
-		describe('Module', function() {
-			it('is plugged', function() {
-				expect(myModule).not.toBeUndefined();
-				console.log('exist')
-			}),
-			it('variable MAX_ERRORS_COUNT should be equal to 5', function() {
-				expect(myModule.MAX_ERRORS_COUNT).toEqual(5);
-				expect(myModule.MAX_ERRORS_COUNT).not.toEqual(6);
-				console.log('numbers')
-			})
-		});
-	});
-	
+	jasmine.getEnv().execute();
 });
