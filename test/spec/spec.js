@@ -1,41 +1,50 @@
-require(['jquery', '../../src/js/app1/views/index', 'API', '../../src/js/app1/app'], function ($, view, API) {
+require(['jquery', '../../src/js/app1/views/index', '../../src/js/app1/controllers/index', 'API', '../../src/js/app1/app'], function ($, view, controller, API) {
 	'use strict';
 	$('.passed').first().remove();
 
-	spyOn(API, 'postResponse').and.callThrough();
+	describe('Task1', function() {
 
-	describe('API', function() {
-
-		beforeEach(function() {
-			jasmine.Ajax.install();
-		});
-
-		afterEach(function() {
-			jasmine.Ajax.uninstall();
-		});
-		
-		it('method "postResponse" should be return success', function() {
+		describe('API method "postResponse"', function() {
+			spyOn(API, 'postResponse').and.callThrough();
 			var data = {
 				request: "Luke, I'm your father"
-			}
+			};
 
-			var promise = API.postResponse(data);
-			promise.then(function() {
-				console.log('success')
-			}, function() {
-				console.log("fail")
+			it('sended with correct data', function(done) {
+				API.postResponse(data).done(function(response) {
+					expect(response).toBeDefined();
+					expect(response.status).toEqual(200);
+					expect(response.result).toEqual("Successfully recieved data from user");
+					expect(response.statusText).toEqual("OK");
+					done();
+				});
+				expect(API.postResponse.calls.any()).toBeTruthy();
+			});
+
+			it('sended with wrong data', function(done) {
+				data.request = "error data";
+				API.postResponse(data).done(function(response) {
+					expect(response).toBeDefined();
+					expect(response.status).toEqual(204);
+					expect(response.result).toBeUndefined();
+					expect(response.statusText).toEqual("No Content");
+					done();
+				});
+			});
+		});
+
+		describe('Controller', function() {
+			it('is connected', function() {
+				expect(controller).toBeDefined();
 			})
+		});
 
-	})
-
-	describe('Module', function() {
-		it('is connected', function() {
-			expect(view).not.toBeUndefined();
-		}),
-		it('variable MAX_ERRORS_COUNT should be equal to 5', function() {
-			expect(view.MAX_ERRORS_COUNT).toEqual(5);
-			expect(view.MAX_ERRORS_COUNT).not.toEqual(6);
-		})
+		describe('View', function() {
+			it('is connected', function() {
+				expect(view).toBeDefined();
+			})
+		});
 	});
+
 	jasmine.getEnv().execute();
 });
