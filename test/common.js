@@ -9,6 +9,7 @@ require.config({
 		jasmine: '../../src/js/components/jasmine/lib/jasmine-core/jasmine.js',
 		domReady: '../../src/js/components/domReady/domReady',
 		API: '../../src/js/API',
-		utils: '../../src/js/utils'
+		utils: '../../src/js/utils',
+		jasmineJQuery: 'lib/jasmine-2.0.0/jasmine-jquery'
 	}
 });
