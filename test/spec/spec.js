@@ -1,11 +1,11 @@
 require(['jquery', '../../src/js/app1/views/index', '../../src/js/app1/controllers/index', 'API', 'text!../../src/task1.html', '../../src/js/app1/app', 'jasmineJQuery'], 
 	function ($, view, controller, API, html) {
 		'use strict';
-		$('.passed').first().remove();
-
-		describe('Task1', function() {
+		//$('.passed').first().remove();
+		
+		xdescribe('Task1', function() {
 /***	******************************/
-			describe('API method "postResponse"', function() { //worked
+			xdescribe('API method "postResponse"', function() {
 				beforeEach(function() {
 					spyOn(API, 'postResponse').and.callThrough();
 				});
