@@ -27,13 +27,14 @@ require.config({
 
 require(['jasmine-boot', 'jquery', 'spec/api_spec'], function (jasmine, $) {
 
+	//var jasmineEnv = jasmine.getEnv();
 	var specs = [];
 	specs.push('spec/api_spec');
 	//specs.push('spec/spec');
 	//specs.push('spec/ajax_spec');
 
-	/*require(specs, function(spec) {
-		$('.passed').first().remove();
-		jasmine.getEnv().execute();
-	});*/
+	// require(specs, function(spec) {
+	// 	$('.passed').first().remove();
+	// 	jasmineEnv.execute();
+	// });
 });
