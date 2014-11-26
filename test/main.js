@@ -25,15 +25,15 @@ require.config({
 	}
 });
 
-require(['jasmine-boot', 'jquery'], function (jasmine, $) {
+require(['jasmine-boot', 'jquery', 'spec/api_spec'], function (jasmine, $) {
 
 	var specs = [];
-	//specs.push('spec/api_spec');
+	specs.push('spec/api_spec');
 	//specs.push('spec/spec');
-	specs.push('spec/ajax_spec');
+	//specs.push('spec/ajax_spec');
 
-	require(specs, function(spec) {
+	/*require(specs, function(spec) {
 		$('.passed').first().remove();
 		jasmine.getEnv().execute();
-	});
+	});*/
 });

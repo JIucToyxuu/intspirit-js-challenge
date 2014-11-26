@@ -17,7 +17,7 @@ define(['jquery'], function($){
 			var dfd = new $.Deferred();
 			postRequest('post_response', data).done(function(response, status, obj) {
 				dfd.resolve({
-					result: response,
+					result: obj.responseText,
 					statusText: obj.statusText,
 					status: obj.status,
 				});
