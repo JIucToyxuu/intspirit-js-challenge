@@ -1,5 +1,5 @@
 define(['jquery', 'API'], function($, API) {
-	$('.passed').first().remove();
+	//$('.passed').first().remove();
 
 	describe("API", function() {
 
@@ -151,6 +151,6 @@ define(['jquery', 'API'], function($, API) {
 
 		});
 
-		jasmine.getEnv().execute();
+		//jasmine.getEnv().execute();
 	});
 });
