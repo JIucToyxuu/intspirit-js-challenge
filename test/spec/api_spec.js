@@ -5,31 +5,32 @@ define(['jquery', 'API'], function($, API) {
 
 		describe('postResponse()', function() {
 			var data = {
-				request: "correct data"
+				request: "default data"
 			};
 
-			beforeEach(function() {
-				jasmine.clock().install();
-				spyOn($, "post").and.callFake(function(url, data) {
-					var reply = new $.ajax();
-					return reply.then(function() {
-						if (data.request.substring(0, 5) !== "error") {
-							reply.responseText = "Successfully recieved data from user";
-							reply.statusText = "OK";
-							reply.status = 200;
-							return reply;
-						} else {
-							reply.responseText = "";
-							reply.statusText = "No Content";
-							reply.status = 204;
-							return reply;
-						}
-					});
-				});
-			});
 
-			afterEach(function() {
-				jasmine.clock().uninstall();
+			beforeEach(function() {
+
+				spyOn($, "post").and.callFake(function() {
+					var reply = new $.Deferred();
+
+					if (data.request.substring(0, 5) !== "error") {
+						reply.responseText = "Successfully recieved data from user";
+						reply.statusText = "OK";
+						reply.status = 200;
+					} else {
+						reply.responseText = "";
+						reply.statusText = "No Content";
+						reply.status = 204;
+					}
+
+					reply.resolve(
+						reply.responseText,
+						reply.statusText,
+						reply
+					);
+					return reply.promise();
+				});
 			});
 
 			it('should be defined', function() {
@@ -63,19 +64,25 @@ define(['jquery', 'API'], function($, API) {
 			});
 		});
 
-		describe('getResponseCodes', function() {
+		describe('getResponseCodes()', function() {
 			beforeEach(function() {
+
 				spyOn($, "get").and.callFake(function() {
-					var reply = new $.ajax();
-					return reply.then(function() {
-						reply.response = '{"result":true,"text":"Success!"}';
-						reply.status = 200;
-						reply.responseJSON = {
-							"result": true,
-							"text": "Success!"
-						};
-						return reply;
-					});
+					var reply = new $.Deferred();
+					reply.responseText = '{"result":true,"text":"Success!"}';
+					reply.statusText = "OK";
+					reply.status = 200;
+					reply.responseJSON = {
+						"result": true,
+						"text": "Success!"
+					};
+
+					reply.resolve(
+						reply.responseText,
+						"success",
+						reply
+					);
+					return reply.promise();
 				});
 			});
 
@@ -85,7 +92,9 @@ define(['jquery', 'API'], function($, API) {
 
 			it('return correct data', function(done) {
 				API.getResponseCodes().done(function(response) {
+					expect(response.result).toBeDefined();
 					expect(response.result).toBeTruthy();
+					expect(response.text).toBeDefined();
 					expect(response.text).toEqual("Success!");
 					done();
 				});
@@ -98,19 +107,25 @@ define(['jquery', 'API'], function($, API) {
 			});
 		});
 
-		describe('getDataSet', function() {
+		describe('getDataSet()', function() {
 			beforeEach(function() {
+
 				spyOn($, "get").and.callFake(function() {
-					var reply = new $.ajax();
-					return reply.then(function() {
-						reply.response = '{"item":"cucumber","type":"vegetable"}';
-						reply.status = 200;
-						reply.responseJSON = {
-							"item": "cucumber",
-							"type": "vegetable"
-						};
-						return reply;
-					});
+					var reply = new $.Deferred();
+					reply.responseText = '{"item":"cucumber","type":"vegetable"}';
+					reply.statusText = "OK";
+					reply.status = 200;
+					reply.responseJSON = {
+						"item": "cucumber",
+						"type": "vegetable"
+					};
+
+					reply.resolve(
+						reply.responseText,
+						"success",
+						reply
+					);
+					return reply.promise();
 				});
 			});
 
@@ -120,7 +135,9 @@ define(['jquery', 'API'], function($, API) {
 
 			it('return correct data', function(done) {
 				API.getDataSet().done(function(response) {
+					expect(response.item).toBeDefined();
 					expect(response.item).toEqual("cucumber");
+					expect(response.type).toBeDefined();
 					expect(response.type).toEqual("vegetable");
 					done();
 				});
