@@ -2,7 +2,8 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 	function($, controller, view, API) {
 
 		describe('Task1', function() {
-			describe('Controller', function() {
+
+			xdescribe('Controller', function() {
 				var data = {
 					request: ""
 				};
@@ -33,8 +34,7 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 					});
 				});
 
-
-				it('should be defined', function() { //worked
+				it('should be defined', function() {
 					expect(controller).toBeDefined();
 					expect(controller.makeRequest).toBeDefined();
 					expect(controller.makeRequest).toEqual(jasmine.any(Function));
@@ -66,6 +66,16 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 			});
 
 			describe('View', function() {
+
+				beforeEach(function() {
+					var text = readFixtures('../../../../src/task1.html');
+					var endText = text.indexOf('<script')
+					var beginText = text.indexOf('<div id="wrap')
+					text = text.substring(0, endText);
+					text = text.substring(beginText);
+					setFixtures(text);
+				});
+
 				it('should be defined', function() {
 					expect(view).toBeDefined();
 					expect(view.getText).toBeDefined();
@@ -76,42 +86,22 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 					expect(view.showSuccessMessage).toEqual(jasmine.any(Function));
 				});
 
-				describe('base html page should', function() {
-
-					beforeEach(function() {
-						var text = readFixtures('../../../../src/task1.html');
-						var endText = text.indexOf('<script')
-						var beginText = text.indexOf('<div id="wrap')
-						text = text.substring(0, endText);
-						text = text.substring(beginText);
-						setFixtures(text);
-					});
+				describe('base html page', function() {
 
 					it('contain div with id = "wrap"', function() {
-						
-
-						// id jasmine-fixtures
-
-
-						//var readFixtures('../../../../src/task1.html');
-						//$('#jasmine-fixtures').html($('#wrap'))
-						//var s = $('#jasmine-fixtures').html()
-						//console.log(s)
-
 						var wrap = $('#wrap');
 						expect(wrap).toExist();
 						expect($('#postForm')).toExist();
 						expect(wrap).toEqual('div#wrap');
 					});
 
-					it('contain one form with input text field and submit button', function() {
-						//loadFixtures('../../../../src/task1.html');
+					it('should contain form with needed elements', function() {
 						var postForm = $('#postForm');
-						expect(postForm).toEqual(postForm);
+
 						expect(postForm).toHaveLength(1);
 						expect(postForm).toEqual('form');
-						expect(postForm).toContainElement('input#inputText');
-						expect(postForm).toContainElement('input#btnPost');
+						expect(postForm).toContainElement('#inputText');
+						expect(postForm).toContainElement('#btnPost');
 					});
 
 					it('contain one field for input text', function() {
@@ -135,9 +125,19 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 				});
 
 				xit('getText() returns correct data', function() {
-					
+					$('#inputText').val('the correct text, without space the edges.');
+					var result = view.getText();
+					expect(result).toEqual('the correct text, without space the edges.');
+					$('#inputText').val('                  the incorrect text, with space the edges.');
+					result = view.getText();
+					expect(result).toEqual('the incorrect text, with space the edges.');
+					$('#inputText').val('                  ');
+					result = view.getText();
+					expect(result).toEqual('');
+					$('#inputText').val('');
+					result = view.getText();
+					expect(result).toEqual('');
 				});
 			});
-			jasmine.getEnv().execute();
 		});
 	});

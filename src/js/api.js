@@ -1,18 +1,19 @@
 define(['jquery'], function($){
-	var mainUrl = 'http://careers.intspirit.com/endpoint/';
+	var baseUrl = 'http://careers.intspirit.com/endpoint/';
 
-	function postRequest(endUrl, data) {
-		return $.post(mainUrl+endUrl, data).fail(function(){
-			console.error('API MODULE ERROR! URL: ' + endUrl);
+	function postRequest(url, data) {
+		return $.post(baseUrl + url, data).fail(function(){
+			console.error('API MODULE ERROR! URL: ' + (baseUrl + url));
 		});
 	}
 	/* переделать getRequest */
-	function getRequest(endUrl) {
-		return $.get(mainUrl+endUrl).fail(function(){
-			console.error('API MODULE ERROR! URL: ' + endUrl);
+	function getRequest(url) {
+		return $.get(baseUrl + url).fail(function(){
+			console.error('API MODULE ERROR! URL: ' + (baseUrl + url));
 		});
 	}
 	return {
+		baseUrl: baseUrl,
 		postResponse: function (data) {
 			var dfd = new $.Deferred();
 			postRequest('post_response', data).done(function(response, status, obj) {
