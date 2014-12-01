@@ -8,9 +8,35 @@ define(['jquery', '../../src/js/app2/controllers/index', '../../src/js/app2/view
 			text = text.substring(0, endText);
 			text = text.substring(beginText);
 
+			var data = {
+				counter: 0,
+				success: 0,
+				fails: 0,
+				percent: 0,
+				history: "",
+			};
 
-			describe('Controller', function() {
-				var data = {
+			beforeEach(function() {
+				jasmine.clock().install();
+
+				setFixtures(text);
+				loadStyleFixtures('../../../../src/style/main.css');
+
+				spyOn(API, "getResponseCodes").and.callFake(function() {
+					var dfd = new $.Deferred();
+
+					setTimeout(function() {
+						dfd.resolve({
+							result: false
+						});
+					}, 100);
+					return dfd.promise();
+				});
+
+			});
+
+			afterEach(function() {
+				data = {
 					counter: 0,
 					success: 0,
 					fails: 0,
@@ -18,36 +44,12 @@ define(['jquery', '../../src/js/app2/controllers/index', '../../src/js/app2/view
 					history: "",
 				};
 
-				beforeEach(function() {
-					jasmine.clock().install();
+				jasmine.clock().uninstall();
+			});
 
-					setFixtures(text);
-					loadStyleFixtures('../../../../src/style/main.css');
 
-					spyOn(API, "getResponseCodes").and.callFake(function() {
-						var dfd = new $.Deferred();
 
-						setTimeout(function() {
-							dfd.resolve({
-								result: false
-							});
-						}, 100);
-						return dfd.promise();
-					});
-
-				});
-
-				afterEach(function() {
-					data = {
-						counter: 0,
-						success: 0,
-						fails: 0,
-						percent: 0,
-						history: "",
-					};
-
-					jasmine.clock().uninstall();
-				});
+			describe('Controller', function() {
 
 				it('should be defined', function() {
 					expect(controller).toBeDefined();
@@ -73,7 +75,7 @@ define(['jquery', '../../src/js/app2/controllers/index', '../../src/js/app2/view
 				});
 
 				describe('collectChart()', function() {
-					it('should works correctly', function() {
+					it('should call view.showChart() with correct data', function() {
 						spyOn(view, 'showChart').and.stub();
 						controller.makeRequest(data);
 						jasmine.clock().tick(101);
@@ -91,7 +93,81 @@ define(['jquery', '../../src/js/app2/controllers/index', '../../src/js/app2/view
 				});
 			});
 
-			xdescribe('View', function() {
+			describe('View', function() {
+				it('should be defined', function() {
+					expect(view).toBeDefined();
+				});
+
+				describe('render()', function() {
+					beforeEach(function() {
+						controller.makeRequest(data);
+						jasmine.clock().tick(101);
+					});
+
+					it('should create wrap for button', function() {
+						expect($('#wrapButton')).toExist();
+					});
+
+					it('should add css class for wrapButton', function() {
+						expect($('#wrapButton')).toHaveClass('errors');
+					});
+
+					it('should add compiled template to table', function() {
+						expect($('#show tbody')).toExist();
+					});
+				});
+
+				describe('showChart', function() {
+
+					it('should add css class for #chart', function() {
+						controller.makeRequest(data);
+						jasmine.clock().tick(101);
+						expect($('#chart')).toHaveClass('chart');
+					});
+
+					it('should be call with correct parameters', function() {
+						spyOn($, 'plot').and.stub();
+						var successChart = {
+							"label": "success",
+							"color": "green",
+							"data": [
+								[0, 0],
+								[1, 0]
+							],
+						};
+						var errorsChart = {
+							"label": "errors",
+							"color": "red",
+							"data": [
+								[0, 0],
+								[1, 1]
+							],
+						};
+						var options = {
+							yaxis: {
+								tickSize: 1,
+							},
+							xaxis: {
+								tickSize: 1,
+							},
+							grid: {
+								borderWidth: 1,
+								backgroundColor: {
+									colors: ["#fff", "#e4f4f4"]
+								},
+								margin: {
+									bottom: 10,
+									left: 10
+								}
+							},
+						};
+
+						controller.makeRequest(data);
+						jasmine.clock().tick(101);
+						expect($.plot).toHaveBeenCalledWith($("#chart"), [successChart, errorsChart], options);
+					});
+
+				});
 
 			});
 		});
