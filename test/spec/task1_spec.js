@@ -41,6 +41,10 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 					expect(controller).toBeDefined();
 				});
 
+				it('should have method makeRequest()', function() {
+					expect(controller.makeRequest).toBeDefined();
+				});
+
 				it('method "makeRequest()" has been started with correct data', function() {
 					spyOn(view, 'getText').and.returnValue("Luke, I'm your father");
 					data.request = view.getText();
@@ -67,7 +71,7 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 				});
 			});
 
-			xdescribe('View', function() {
+			describe('View', function() {
 
 				beforeEach(function() {
 					var text = readFixtures('../../../../src/task1.html');
@@ -80,15 +84,21 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 
 				it('should be defined', function() {
 					expect(view).toBeDefined();
-					expect(view.getText).toBeDefined();
-					expect(view.getText).toEqual(jasmine.any(Function));
-					expect(view.prependErrorMessage).toBeDefined();
-					expect(view.prependErrorMessage).toEqual(jasmine.any(Function));
-					expect(view.showSuccessMessage).toBeDefined();
-					expect(view.showSuccessMessage).toEqual(jasmine.any(Function));
 				});
 
-				describe('base html page', function() {
+				it('should have method getText()', function() {
+					expect(view.getText).toBeDefined();
+				});
+
+				it('should have method prependErrorMessage()', function() {
+					expect(view.prependErrorMessage).toBeDefined();
+				});
+
+				it('should have method showSuccessMessage()', function() {
+					expect(view.showSuccessMessage).toBeDefined();
+				});
+
+				xdescribe('base html page', function() {
 
 					it('contain div with id = "wrap"', function() {
 						var wrap = $('#wrap');
@@ -126,20 +136,29 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 					});
 				});
 
-				xit('getText() returns correct data', function() {
-					$('#inputText').val('the correct text, without space the edges.');
-					var result = view.getText();
-					expect(result).toEqual('the correct text, without space the edges.');
-					$('#inputText').val('                  the incorrect text, with space the edges.');
-					result = view.getText();
-					expect(result).toEqual('the incorrect text, with space the edges.');
-					$('#inputText').val('                  ');
-					result = view.getText();
-					expect(result).toEqual('');
-					$('#inputText').val('');
-					result = view.getText();
-					expect(result).toEqual('');
+				describe('getText()', function() {
+					it('should return empty string', function() {
+						$('#inputText').val('');
+						result = view.getText();
+						expect(result).toEqual('');
+					});
+					it('should trim spacebar and return empty string', function() {
+						$('#inputText').val('                  ');
+						result = view.getText();
+						expect(result).toEqual('');
+					});
+					it('should trim spacebar the edges in string', function() {
+						$('#inputText').val('        text  ');
+						result = view.getText();
+						expect(result).toEqual('text');
+					})
+					it('should return string from #inputText', function() {
+						$('#inputText').val('foobar');
+						var result = view.getText();
+						expect(result).toEqual('foobar');
+					});
 				});
+
 			});
 		});
 	});
