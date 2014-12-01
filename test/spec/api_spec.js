@@ -1,37 +1,25 @@
 define(['jquery', 'API'], function($, API) {
-	//$('.passed').first().remove();
 
 	describe("API", function() {
 
-		it('should have correct base url', function () {
+		it('should have correct base url', function() {
 			expect(API.baseUrl).toEqual('http://careers.intspirit.com/endpoint/');
 		});
 
 		describe('postResponse()', function() {
-			var data = {
-				request: "default data"
-			};
 
 			beforeEach(function() {
 				spyOn($, "post").and.callFake(function() {
-					var reply = new $.Deferred();
-
-					if (data.request.substring(0, 5) !== "error") {
-						reply.responseText = "Successfully recieved data from user";
-						reply.statusText = "OK";
-						reply.status = 200;
-					} else {
-						reply.responseText = "";
-						reply.statusText = "No Content";
-						reply.status = 204;
-					}
-
-					reply.resolve(
-						reply.responseText,
-						reply.statusText,
-						reply
-					);
-					return reply.promise();
+					var dfd = new $.Deferred();
+					setTimeout(dfd.resolve(
+						'responseText',
+						'statusText', {
+							responseText: 'responseText',
+							statusText: 'OK',
+							status: 200
+						}
+					), 100);
+					return dfd.promise();
 				});
 			});
 
@@ -39,58 +27,57 @@ define(['jquery', 'API'], function($, API) {
 				expect(API.postResponse).toBeDefined();
 			});
 
-			it('should call jquery post with correct parameters', function() {
-				//$.post
-			});
-
-			it('should call jquery post with correct parameters', function(done) {
-				var data = {request: "Luke, I'm your father"};
-
-				API.postResponse(data).done(function(response) {
-					expect(response.result).toEqual("Successfully recieved data from user");
-					expect(response.statusText).toEqual("OK");
-					expect(response.status).toEqual(200);
+			it('should call $.post with correct parameters', function(done) {
+				API.postResponse('data').done(function() {
+					expect($.post).toHaveBeenCalledWith(API.baseUrl + 'post_response', 'data');
 					done();
 				});
 			});
 
-			it('should call jquery post with wrong parameters', function(done) {
-				data.request = "error";
-				API.postResponse(data).done(function(response) {
-					expect(response.result).toEqual("");
-					expect(response.statusText).toEqual("No Content");
-					expect(response.status).toEqual(204);
+			it('should call $.post with correct returned data', function(done) {
+				$.post().done(function(responseText, statusText, obj) {
+					expect(obj).toEqual({
+						responseText: 'responseText',
+						statusText: 'OK',
+						status: 200
+					});
+					done();
+				});
+			});
+
+			it('should return correct data', function(done) {
+				API.postResponse('data').done(function(response) {
+					expect(response).toEqual({
+						result: 'responseText',
+						statusText: 'OK',
+						status: 200,
+					});
 					done();
 				});
 			});
 
 			it('should return promise object', function() {
-				var promise = API.postResponse(data);
+				var promise = API.postResponse('data');
 				expect(promise.promise).toBeDefined();
 				expect(promise.resolve).toBeUndefined();
 			});
 		});
 
-		//TODO: Refactor
 		describe('getResponseCodes()', function() {
 			beforeEach(function() {
 
 				spyOn($, "get").and.callFake(function() {
-					var reply = new $.Deferred();
-					reply.responseText = '{"result":true,"text":"Success!"}';
-					reply.statusText = "OK";
-					reply.status = 200;
-					reply.responseJSON = {
-						"result": true,
-						"text": "Success!"
-					};
-
-					reply.resolve(
-						reply.responseText,
-						"success",
-						reply
-					);
-					return reply.promise();
+					var dfd = new $.Deferred();
+					setTimeout(function() {
+						dfd.resolve(
+							'{"result": "true"}',
+							'success', {
+								responseJSON: {
+									result: true
+								}
+							})
+					}, 100);
+					return dfd.promise();
 				});
 			});
 
@@ -98,12 +85,29 @@ define(['jquery', 'API'], function($, API) {
 				expect(API.getResponseCodes).toBeDefined();
 			});
 
-			it('return correct data', function(done) {
+			it('should call $.get with correct parameters', function(done) {
+				API.getResponseCodes().done(function() {
+					expect($.get).toHaveBeenCalledWith(API.baseUrl + 'response_codes');
+					done();
+				});
+			});
+
+			it('should call $.get with correct returned data', function(done) {
+				$.get().done(function(responseText, statusText, obj) {
+					expect(obj).toEqual({
+						responseJSON: {
+							result: true
+						}
+					});
+					done();
+				});
+			});
+
+			it('should return correct data', function(done) {
 				API.getResponseCodes().done(function(response) {
-					expect(response.result).toBeDefined();
-					expect(response.result).toBeTruthy();
-					expect(response.text).toBeDefined();
-					expect(response.text).toEqual("Success!");
+					expect(response).toEqual({
+						result: true
+					});
 					done();
 				});
 			});
@@ -119,16 +123,16 @@ define(['jquery', 'API'], function($, API) {
 			beforeEach(function() {
 				spyOn($, "get").and.callFake(function() {
 					var dfd = new $.Deferred();
-
-					// TODO: not best idea
-					setTimeout(function () {
+					setTimeout(function() {
 						dfd.resolve(
-							'{"foo":"bar"}',
-							'success',
-							{responseJSON: {foo: 'bar'}}
+							'{"item":"apple"}',
+							'success', {
+								responseJSON: {
+									item: 'apple'
+								}
+							}
 						);
-					}, 0);
-
+					}, 100);
 					return dfd.promise();
 				});
 			});
@@ -144,9 +148,22 @@ define(['jquery', 'API'], function($, API) {
 				});
 			});
 
+			it('should call $.get with correct returned data', function(done) {
+				$.get().done(function(responseText, statusText, obj) {
+					expect(obj).toEqual({
+						responseJSON: {
+							item: 'apple'
+						}
+					});
+					done();
+				});
+			});
+
 			it('should return correct data', function(done) {
 				API.getDataSet().done(function(response) {
-					expect(response).toEqual({foo: 'bar'});
+					expect(response).toEqual({
+						item: 'apple'
+					});
 					done();
 				});
 			});
