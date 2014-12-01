@@ -11,14 +11,16 @@ define(['jquery', 'API'], function($, API) {
 			beforeEach(function() {
 				spyOn($, "post").and.callFake(function() {
 					var dfd = new $.Deferred();
-					setTimeout(dfd.resolve(
-						'responseText',
-						'statusText', {
-							responseText: 'responseText',
-							statusText: 'OK',
-							status: 200
-						}
-					), 100);
+					setTimeout(function() {
+						dfd.resolve(
+							'responseText',
+							'statusText', {
+								responseText: 'responseText',
+								statusText: 'OK',
+								status: 200
+							}
+						)
+					}, 100);
 					return dfd.promise();
 				});
 			});

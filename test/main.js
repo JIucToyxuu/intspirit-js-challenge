@@ -25,15 +25,15 @@ require.config({
 	}
 });
 
-require(['jquery', 'spec/api_spec'], function ($) {
-	///$('.alert span').first().remove();
-	//$('.alert span').first().remove();
+require(['jquery'], function ($) {
+	$('.alert span').first().remove();
+	$('.alert span').first().remove();
 
 	var specs = [];
-	specs.push('spec/api_spec');
-	//specs.push('spec/task1_spec');
+	//specs.push('spec/api_spec');
+	specs.push('spec/task1_spec');
 
 	require(specs, function(spec) {
-		jasmine.getEnv().execute();//not correct working
+		jasmine.getEnv().execute();
 	});
 });

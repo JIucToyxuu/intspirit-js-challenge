@@ -3,69 +3,71 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 
 		describe('Task1', function() {
 
-			xdescribe('Controller', function() {
+			describe('Controller', function() {
 				var data = {
 					request: ""
 				};
 
 				beforeEach(function() {
+					jasmine.clock().install();
+
 					spyOn(view, "showSuccessMessage");
 					spyOn(view, "prependErrorMessage");
 
 					spyOn(API, "postResponse").and.callFake(function() {
-						var reply = new $.Deferred();
+						var dfd = new $.Deferred();
+						var status;
 
 						if (data.request.substring(0, 5) !== "error") {
-							reply.responseText = "Successfully recieved data from user";
-							reply.statusText = "OK";
-							reply.status = 200;
+							status = "success";
 						} else {
-							reply.responseText = "";
-							reply.statusText = "No Content";
-							reply.status = 204;
+							status = "";
 						}
 
-						reply.resolve({
-							result: reply.responseText,
-							statusText: reply.statusText,
-							status: reply.status
-						});
-						return reply.promise();
+						setTimeout(function() {
+							dfd.resolve({
+								result: status
+							})
+						}, 100);
+						return dfd.promise();
 					});
+				});
+
+				afterEach(function() {
+					jasmine.clock().uninstall();
 				});
 
 				it('should be defined', function() {
 					expect(controller).toBeDefined();
-					expect(controller.makeRequest).toBeDefined();
-					expect(controller.makeRequest).toEqual(jasmine.any(Function));
 				});
 
 				it('method "makeRequest()" has been started with correct data', function() {
-					view.getText = jasmine.createSpy().and.returnValue("Luke, I'm your father");
+					spyOn(view, 'getText').and.returnValue("Luke, I'm your father");
 					data.request = view.getText();
 					controller.makeRequest();
+					jasmine.clock().tick(101);
 					expect(view.showSuccessMessage.calls.any()).toBeTruthy();
-					expect(view.prependErrorMessage.calls.any()).toBeFalsy();
 				});
 
 				it('method "makeRequest()" has been started with not correct data', function() {
-					view.getText = jasmine.createSpy().and.returnValue("error! Blue screen of death...");
+					spyOn(view, 'getText').and.returnValue("error! Blue screen of death...");
 					data.request = view.getText();
 					controller.makeRequest();
+					jasmine.clock().tick(101);
 					expect(view.prependErrorMessage.calls.any()).toBeTruthy();
-					expect(view.showSuccessMessage.calls.any()).toBeFalsy();
+					expect(view.prependErrorMessage).not.toHaveBeenCalledWith("This field is empty!");
 				});
 
 				it('method "makeRequest()" has been started with empty field', function() {
-					view.getText = jasmine.createSpy().and.returnValue("");
+					spyOn(view, 'getText').and.returnValue("");
 					data.request = view.getText();
 					controller.makeRequest();
+					jasmine.clock().tick(101);
 					expect(view.prependErrorMessage).toHaveBeenCalledWith("This field is empty!");
-					expect(view.showSuccessMessage.calls.any()).toBeFalsy();
 				});
 			});
 
-			describe('View', function() {
+			xdescribe('View', function() {
 
 				beforeEach(function() {
 					var text = readFixtures('../../../../src/task1.html');
