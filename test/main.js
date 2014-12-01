@@ -31,7 +31,8 @@ require(['jquery'], function ($) {
 
 	var specs = [];
 	//specs.push('spec/api_spec');
-	specs.push('spec/task1_spec');
+	//specs.push('spec/task1_spec');
+	specs.push('spec/task2_spec');
 
 	require(specs, function(spec) {
 		jasmine.getEnv().execute();
