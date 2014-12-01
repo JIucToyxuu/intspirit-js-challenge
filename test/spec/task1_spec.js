@@ -98,64 +98,116 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 					expect(view.showSuccessMessage).toBeDefined();
 				});
 
-				xdescribe('base html page', function() {
+				describe('base html page', function() {
 
-					it('contain div with id = "wrap"', function() {
-						var wrap = $('#wrap');
-						expect(wrap).toExist();
+					it('should contain div with id = "wrap"', function() {
+						expect($('div#wrap')).toExist();
+					});
+
+					it('should contain form with id="postForm"', function() {
 						expect($('#postForm')).toExist();
-						expect(wrap).toEqual('div#wrap');
 					});
 
-					it('should contain form with needed elements', function() {
-						var postForm = $('#postForm');
+					describe('field for input text', function() {
 
-						expect(postForm).toHaveLength(1);
-						expect(postForm).toEqual('form');
-						expect(postForm).toContainElement('#inputText');
-						expect(postForm).toContainElement('#btnPost');
+						it('should be exist', function() {
+							expect($('input#inputText')).toExist();
+						});
+
+						it('should be empty', function() {
+							expect($('input#inputText')).toBeEmpty();
+						});
 					});
 
-					it('contain one field for input text', function() {
-						var inputText = $('#inputText');
-						expect(inputText).toExist();
-						expect(inputText).toHaveLength(1);
-						expect(inputText).toBeEmpty();
-						expect(inputText).toEqual('input');
-						expect(inputText).toHaveProp('type', 'text');
-					});
+					describe('button for submit send data', function() {
 
-					it('contain one submit button for send request', function() {
-						var btnPost = $('#btnPost');
-						expect(btnPost).toExist();
-						expect(btnPost).toHaveLength(1);
-						expect(btnPost).toEqual('input');
-						expect(btnPost).toHaveProp('type', 'submit');
-						expect(btnPost).toHaveValue('Submit');
-						expect(btnPost).toHaveClass('buttons');
+						it('should be exist', function() {
+							expect($('input#btnPost')).toExist();
+						});
+
+						it('should have value equal to "Submit"', function() {
+							expect($('input#btnPost')).toHaveValue('Submit');
+						});
 					});
 				});
 
 				describe('getText()', function() {
+
 					it('should return empty string', function() {
 						$('#inputText').val('');
 						result = view.getText();
 						expect(result).toEqual('');
 					});
+
 					it('should trim spacebar and return empty string', function() {
 						$('#inputText').val('                  ');
 						result = view.getText();
 						expect(result).toEqual('');
 					});
+
 					it('should trim spacebar the edges in string', function() {
 						$('#inputText').val('        text  ');
 						result = view.getText();
 						expect(result).toEqual('text');
-					})
+					});
+
 					it('should return string from #inputText', function() {
 						$('#inputText').val('foobar');
 						var result = view.getText();
 						expect(result).toEqual('foobar');
+					});
+				});
+
+				describe('prependErrorMessage()', function() {
+
+					it('should be create div with id="messagesContainer"', function() {
+						expect($('#messagesContainer')).not.toExist();
+						view.prependErrorMessage('message');
+						expect($('#messagesContainer')).toExist();
+					});
+
+					it('should change button value to "Resubmit"', function() {
+						view.prependErrorMessage('message');
+						expect($('input#btnPost')).toHaveValue('Resubmit');
+					});
+
+					it('should be add new error', function() {
+						view.prependErrorMessage('message');
+						expect($('.errors')).toExist();
+					});
+
+					it('should be delete extra errors', function() {
+						view.prependErrorMessage('message');
+						view.prependErrorMessage('message');
+						view.prependErrorMessage('message');
+						view.prependErrorMessage('message');
+						view.prependErrorMessage('message');
+						view.prependErrorMessage('message');
+						expect($('.errors').length).toEqual(5);
+					});
+
+				});
+
+				describe('showSuccessMessage()', function() {
+					beforeEach(function() {
+						spyOn(window, 'alert').and.callFake(function(message) {});
+						view.showSuccessMessage('message');
+					});
+
+					it('should change button value to "Submit"', function() {
+						expect($('input#btnPost')).toHaveValue('Submit');
+					});
+
+					it('should be delete "messagesContainer"', function() {
+						expect($('#messagesContainer')).not.toExist();
+					});
+
+					it('should be alert user about success', function() {
+						expect(window.alert).toHaveBeenCalledWith("message");
+					});
+
+					it('should be cleared field input text', function() {
+						expect($('input#inputText')).toBeEmpty();
 					});
 				});
 
