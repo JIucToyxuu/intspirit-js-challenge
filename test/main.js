@@ -12,7 +12,8 @@ require.config({
 		domReady: '../../src/js/components/domReady/domReady',
 		API: '../../src/js/API',
 		utils: '../../src/js/utils',
-		jasmineJQuery: '../../src/js/components/jasmine-jquery/lib/jasmine-jquery'
+		jasmineJQuery: '../../src/js/components/jasmine-jquery/lib/jasmine-jquery',
+		helpers: '../../src/js/helpers'
 	},
 	shim: {
 		'jasmine-html': {
@@ -30,9 +31,10 @@ require(['jquery'], function ($) {
 	$('.alert span').first().remove();
 
 	var specs = [];
-	//specs.push('spec/api_spec');
-	//specs.push('spec/task1_spec');
+	specs.push('spec/api_spec');
+	specs.push('spec/task1_spec');
 	specs.push('spec/task2_spec');
+	specs.push('spec/task3_spec');
 
 	require(specs, function(spec) {
 		jasmine.getEnv().execute();

@@ -1,4 +1,4 @@
-define(['jquery', 'utils', 'handlebars', 'text!templates/task3.html', 'helpers'], function ($, utils, Handlebars, template) {
+define(['jquery', 'utils', 'handlebars', 'text!../../../templates/task3.html', 'helpers'], function ($, utils, Handlebars, template) {
 	var compiled = Handlebars.compile(template);
 	var data = {};
 
