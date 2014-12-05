@@ -1,7 +1,69 @@
 define(['jquery', '../../src/js/app3/controllers/index', '../../src/js/app3/views/index', 'API', 'handlebars', 'jasmineJQuery'],
 	function($, controller, view, API, Handlebars) {
 
-		describe('Task2', function() {
+		describe('Task3', function() {
+
+			describe('View', function() {
+				var text = readFixtures('../../../../src/task3.html');
+				var endText = text.indexOf('<script data-main');
+				var beginText = text.indexOf('<div id="wrap');
+				text = text.substring(0, endText);
+				text = text.substring(beginText);
+
+				var allItems = {
+					items: {
+						fruit: {
+							banana: 1,
+						},
+						vegetable: {
+							cucumber: 666,
+						}
+					}
+				};
+
+				beforeEach(function() {
+					setFixtures(text);
+					loadStyleFixtures('../../../../src/style/main.css');
+
+				});
+
+
+				it('should be defined', function() {
+					expect(view).toBeDefined();
+				});
+
+				it('should be added container for display result', function() {
+					view.render(allItems);
+					expect($('#container')).toExist();
+				});
+
+				it('should be to added button for clearing data', function() {
+					view.render(allItems);
+					expect($('#btnClear')).toExist();
+				});
+
+				it('should be added ul elements to contain types', function() {
+					view.render(allItems);
+					expect($('#container ul:contains("vegetable")')).toBeInDOM();
+					expect($('#container ul:contains("fruit")')).toBeInDOM();
+				});
+
+				it('should be added li elements to contain items', function() {
+					view.render(allItems);
+					expect($('ul li:contains("banana")')).toContainText('banana: 1');
+					expect($('ul li:contains("cucumber")')).toContainText('cucumbers: 666');
+				});
+
+				it('should be to clear data at clicked button', function() {
+					view.render(allItems);
+					$('#btnClear').click();
+					expect(allItems.items).toEqual({});
+					expect($('#container')).not.toExist();
+					expect($('#btnClear')).not.toExist();
+				});
+			});
+
+
 			describe('Controller', function() {
 
 				controller.allItems.items = {
@@ -56,10 +118,5 @@ define(['jquery', '../../src/js/app3/controllers/index', '../../src/js/app3/view
 					expect(view.render).toHaveBeenCalledWith(controller.allItems);
 				});
 			});
-
-			xdescribe('View', function() {
-
-			});
 		});
-
 	});
