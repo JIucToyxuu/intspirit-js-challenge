@@ -1,10 +1,10 @@
-define(['jquery', '../../src/js/app3/controllers/index', '../../src/js/app3/views/index', 'API', 'handlebars', 'jasmineJQuery'],
+define(['jquery', '../../../src/js/app3/controllers/index', '../../../src/js/app3/views/index', 'API', 'handlebars', 'jasmineJQuery'],
 	function($, controller, view, API, Handlebars) {
 
 		describe('Task3', function() {
 
 			describe('View', function() {
-				var text = readFixtures('../../../../src/task3.html');
+				var text = readFixtures('../../../../../src/task3.html');
 				var endText = text.indexOf('<script data-main');
 				var beginText = text.indexOf('<div id="wrap');
 				text = text.substring(0, endText);
@@ -23,7 +23,7 @@ define(['jquery', '../../src/js/app3/controllers/index', '../../src/js/app3/view
 
 				beforeEach(function() {
 					setFixtures(text);
-					loadStyleFixtures('../../../../src/style/main.css');
+					loadStyleFixtures('../../../../../src/style/main.css');
 
 				});
 
