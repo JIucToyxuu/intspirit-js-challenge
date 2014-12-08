@@ -48,3 +48,5 @@ Temporary Items
 src/js/components
 *.sublime-*
 node_modules
+selenium-server-standalone-2.44.0.jar
+chromedriver.exe

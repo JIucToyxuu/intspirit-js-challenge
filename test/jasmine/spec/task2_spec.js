@@ -1,8 +1,8 @@
-define(['jquery', '../../src/js/app2/controllers/index', '../../src/js/app2/views/index', 'API', 'handlebars', 'jasmineJQuery'],
+define(['jquery', '../../../src/js/app2/controllers/index', '../../../src/js/app2/views/index', 'API', 'handlebars', 'jasmineJQuery'],
 	function($, controller, view, API, Handlebars) {
 
 		describe('Task2', function() {
-			var text = readFixtures('../../../../src/task2.html');
+			var text = readFixtures('../../../../../src/task2.html');
 			var endText = text.indexOf('<script data-main');
 			var beginText = text.indexOf('<div id="wrap');
 			text = text.substring(0, endText);
@@ -20,7 +20,7 @@ define(['jquery', '../../src/js/app2/controllers/index', '../../src/js/app2/view
 				jasmine.clock().install();
 
 				setFixtures(text);
-				loadStyleFixtures('../../../../src/style/main.css');
+				loadStyleFixtures('../../../../../src/style/main.css');
 
 				spyOn(API, "getResponseCodes").and.callFake(function() {
 					var dfd = new $.Deferred();

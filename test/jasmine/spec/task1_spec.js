@@ -1,4 +1,4 @@
-define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/views/index', 'API', 'jasmineJQuery'],
+define(['jquery', '../../../src/js/app1/controllers/index', '../../../src/js/app1/views/index', 'API', 'jasmineJQuery'],
 	function($, controller, view, API) {
 
 		describe('Task1', function() {
@@ -74,7 +74,7 @@ define(['jquery', '../../src/js/app1/controllers/index', '../../src/js/app1/view
 			describe('View', function() {
 
 				beforeEach(function() {
-					var text = readFixtures('../../../../src/task1.html');
+					var text = readFixtures('../../../../../src/task1.html');
 					var endText = text.indexOf('<script')
 					var beginText = text.indexOf('<div id="wrap')
 					text = text.substring(0, endText);
