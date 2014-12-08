@@ -5,7 +5,6 @@ describe('Task2', function() {
 	var driver = new webdriver.Builder().
 	withCapabilities(webdriver.Capabilities.chrome()).
 	build();
-	driver.manage().window().maximize();
 
 
 
@@ -15,7 +14,7 @@ describe('Task2', function() {
 
 	});
 
-	it('should be added wrapper for button', function(done) { //worked
+	it('should be added wrapper for button', function(done) {
 		driver.sleep(100);
 		driver.findElement(webdriver.By.id('getData')).click();
 		driver.findElements(webdriver.By.id('wrapButton')).then(function(elements) {

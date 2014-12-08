@@ -5,7 +5,6 @@ describe('Task1', function() {
 	var driver = new webdriver.Builder().
 	withCapabilities(webdriver.Capabilities.chrome()).
 	build();
-	driver.manage().window().maximize();
 
 
 
@@ -15,7 +14,7 @@ describe('Task1', function() {
 		driver.findElement(webdriver.By.id('inputText')).clear();
 	});
 
-	it('should be shown the text - "This field is empty!"', function(done) { //worked
+	it('should be shown the text - "This field is empty!"', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('          ');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.findElement(webdriver.By.xpath('//*[@id="messagesContainer"]/div[1]')).getText().then(function(text) {
@@ -24,7 +23,7 @@ describe('Task1', function() {
 		});
 	});
 
-	it('should be shown the text - "Error! No Content! Status request: 204"', function(done) { //worked
+	it('should be shown the text - "Error! No Content! Status request: 204"', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('error');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.sleep(100);
@@ -34,14 +33,14 @@ describe('Task1', function() {
 		});
 	});
 
-	it('should be to change value button to "Resubmit" if introduced wrong text', function(done) { //worked
+	it('should be to change value button to "Resubmit" if introduced wrong text', function(done) {
 		driver.findElement(webdriver.By.id('btnPost')).getAttribute('value').then(function(text) {
 			expect(text).toEqual('Resubmit');
 			done();
 		});
 	});
 
-	it('should be to showed not over 5 errors', function(done) { //worked
+	it('should be to showed not over 5 errors', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('error');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.findElement(webdriver.By.id('btnPost')).click();
@@ -54,7 +53,7 @@ describe('Task1', function() {
 		});
 	});
 
-	it('should be to show alert with message about success', function(done) { //worked
+	it('should be to show alert with message about success', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('Luke, I\'m your father');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.sleep(100);
@@ -65,7 +64,7 @@ describe('Task1', function() {
 		driver.switchTo().alert().accept();
 	});
 
-	it('should be change value button to "Submit" if introduced right text', function(done) { //worked
+	it('should be change value button to "Submit" if introduced right text', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('Luke, I\'m your father');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.sleep(100);
@@ -76,7 +75,7 @@ describe('Task1', function() {
 		});
 	});
 
-	it('should be reset value input text field', function(done) { //worked
+	it('should be reset value input text field', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('Luke, I\'m your father');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.sleep(100);
@@ -87,7 +86,7 @@ describe('Task1', function() {
 		});
 	});
 
-	it('should be to deleted container for messages', function(done) { //worked
+	it('should be to deleted container for messages', function(done) {
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('Luke, I\'m your father');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.sleep(100);
