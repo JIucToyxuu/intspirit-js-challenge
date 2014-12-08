@@ -34,7 +34,7 @@ define(['../views/index', 'API'], function (view, API) {
 					data.fails++;
 					data.history+=0;
 				}
-				data.percent = ((data.fails/(data.success+data.fails))*100).toFixed(2);
+				data.percent = parseInt(((data.fails/(data.success+data.fails))*100).toFixed(2));
 				// response.result -> true/false
 				view.render(response.result, data);
 				collectChart(data);
