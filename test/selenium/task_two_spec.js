@@ -10,10 +10,6 @@ describe('Task2', function() {
 
 	driver.get('http://localhost:9000/src/task2.html');
 
-	beforeEach(function() {
-
-	});
-
 	it('should be added wrapper for button', function(done) {
 		driver.sleep(100);
 		driver.findElement(webdriver.By.id('getData')).click();

@@ -10,11 +10,12 @@ describe('Task1', function() {
 
 	driver.get('http://localhost:9000/src/task1.html');
 
-	beforeEach(function() {
+	afterEach(function() {
 		driver.findElement(webdriver.By.id('inputText')).clear();
 	});
 
 	it('should be shown the text - "This field is empty!"', function(done) {
+		driver.sleep(100);
 		driver.findElement(webdriver.By.id('inputText')).sendKeys('          ');
 		driver.findElement(webdriver.By.id('btnPost')).click();
 		driver.findElement(webdriver.By.xpath('//*[@id="messagesContainer"]/div[1]')).getText().then(function(text) {
