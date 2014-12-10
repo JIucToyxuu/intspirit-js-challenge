@@ -1,0 +1,41 @@
+<!doctype>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Task #2</title>
+		<link rel="stylesheet" href="style/main.css"/>
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="tasks">
+				This is Task #2
+			</div>
+			<button id="getData">
+				Get codes
+			</button>
+			<table id="show">
+				<script id="templateCodes" type="text/x-handlebars-template">
+					<tbody>
+						<tr id="head">
+							<td>Success</td>
+							<td>Percent error</td>
+							<td>Failure</td>
+						</tr>
+						<tr id="count">
+							<td>{{success}}</td>
+							<td>{{percent}} %</td>
+							<td>{{fails}}</td>
+						</tr>
+						<tr>
+							<td colspan="3" id="last">Ошибок с крайнего успеха - {{counter}}</td>
+						</tr>
+					</tbody>
+				</script>
+			</table>
+			<div id="chart">
+			</div>
+		</div>
+		<script data-main="js/app2/config.js" src="js/components/requirejs/require.js"></script>
+	</body>
+</html>
